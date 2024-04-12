@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Get_Help</RootNamespace>
+    <UserSecretsId>058c9b0b-307c-4130-becb-cca6ff15dcfc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
