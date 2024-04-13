@@ -23,10 +23,19 @@ namespace Get_Help_Infrastructure.Data.Models
         [ForeignKey(nameof(TicketId))]
         public Ticket Ticket { get; set; } = null!;
 
-        [Required]
-        [Comment("Identifier for User sending the Message")]
-        public int UserId { get; set; }
-        [ForeignKey(nameof(TicketId))]
-        public ApplicationUser User { get; set; } = null!;
+        [Comment("Agent Identifier")]
+        public int AgentId { get; set; }
+        [ForeignKey(nameof(AgentId))]
+        public Agent? Agent { get; set; }
+
+        [Comment("Client Identifier")]
+        public int ClientId { get; set; }
+        [ForeignKey(nameof(ClientId))]
+        public Client? Client { get; set; }
+
+        [Comment("Delete Type Identifier")]
+        public int DeleteTypeId { get; set; }
+        [ForeignKey(nameof(DeleteTypeId))]
+        public DeleteType? DeleteType { get; set; }
     }
 }

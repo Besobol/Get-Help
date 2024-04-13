@@ -2,6 +2,8 @@
 {
     public static class DataConstants
     {
+        public const int DeleteTypeNameMaxLength = 10;
+
         public const int AgentFirstNameMaxLength = 50;
         public const int AgentLastNameMaxLength = 50;
 

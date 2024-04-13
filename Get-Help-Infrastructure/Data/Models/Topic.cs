@@ -23,6 +23,11 @@ namespace Get_Help_Infrastructure.Data.Models
         [ForeignKey(nameof(ServiceId))]
         public Service Service { get; set; } = null!;
 
+        [Comment("Delete Type Identifier")]
+        public int DeleteTypeId { get; set; }
+        [ForeignKey(nameof(DeleteTypeId))]
+        public DeleteType? DeleteType { get; set; }
+
         public List<Ticket> Tickets { get; set; } = new();
     }
 }
