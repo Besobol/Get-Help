@@ -1,7 +1,9 @@
-﻿namespace Get_Help.Core.Contracts
+﻿using Get_Help.Core.Models;
+
+namespace Get_Help.Core.Contracts
 {
     public interface IHomeService
     {
-        Task GetAllServices();
+        Task<List<ServiceModel>> GetAllServices();
     }
 }
