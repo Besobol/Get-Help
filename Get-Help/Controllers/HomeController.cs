@@ -1,4 +1,6 @@
+using Get_Help.Core.Contracts;
 using Get_Help.Models;
+using Get_Help_Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +8,22 @@ namespace Get_Help.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
+        private readonly IHomeService service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> _logger,
+            IHomeService _service)
         {
-            _logger = logger;
+            logger = _logger;
+            service = _service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await service.GetAllServices();
+
+            return View(model);
         }
 
         public IActionResult Privacy()

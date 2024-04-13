@@ -1,6 +1,7 @@
 ﻿using Get_Help.Core.Contracts;
 using Get_Help.Core.Services;
 using Get_Help_Infrastructure.Data;
+using Get_Help_Infrastructure.Data.Common;
 using Get_Help_Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             string connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddScoped<IRepository, Repository>();
 
             return services;
         }
