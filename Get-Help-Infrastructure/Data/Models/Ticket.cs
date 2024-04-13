@@ -35,7 +35,7 @@ namespace Get_Help_Infrastructure.Data.Models
         public Topic Topic { get; set; } = null!;
 
         [Comment("Delete Type Identifier")]
-        public int DeleteTypeId { get; set; }
+        public int? DeleteTypeId { get; set; }
         [ForeignKey(nameof(DeleteTypeId))]
         public DeleteType? DeleteType { get; set; }
 

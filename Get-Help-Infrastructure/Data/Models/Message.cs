@@ -34,7 +34,7 @@ namespace Get_Help_Infrastructure.Data.Models
         public Client? Client { get; set; }
 
         [Comment("Delete Type Identifier")]
-        public int DeleteTypeId { get; set; }
+        public int? DeleteTypeId { get; set; }
         [ForeignKey(nameof(DeleteTypeId))]
         public DeleteType? DeleteType { get; set; }
     }

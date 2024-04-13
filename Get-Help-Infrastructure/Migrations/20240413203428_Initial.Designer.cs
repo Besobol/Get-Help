@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Get_Help_Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240413121758_InitialModelsAdd")]
-    partial class InitialModelsAdd
+    [Migration("20240413203428_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -227,7 +227,7 @@ namespace Get_Help_Infrastructure.Migrations
                         .HasColumnType("nvarchar(600)")
                         .HasComment("Message Content");
 
-                    b.Property<int>("DeleteTypeId")
+                    b.Property<int?>("DeleteTypeId")
                         .HasColumnType("int")
                         .HasComment("Delete Type Identifier");
 
@@ -260,7 +260,7 @@ namespace Get_Help_Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DeleteTypeId")
+                    b.Property<int?>("DeleteTypeId")
                         .HasColumnType("int")
                         .HasComment("Delete Type Identifier");
 
@@ -302,7 +302,7 @@ namespace Get_Help_Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Client Identifier");
 
-                    b.Property<int>("DeleteTypeId")
+                    b.Property<int?>("DeleteTypeId")
                         .HasColumnType("int")
                         .HasComment("Delete Type Identifier");
 
@@ -343,7 +343,7 @@ namespace Get_Help_Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DeleteTypeId")
+                    b.Property<int?>("DeleteTypeId")
                         .HasColumnType("int")
                         .HasComment("Delete Type Identifier");
 
@@ -420,10 +420,12 @@ namespace Get_Help_Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -459,10 +461,12 @@ namespace Get_Help_Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -510,9 +514,7 @@ namespace Get_Help_Infrastructure.Migrations
 
                     b.HasOne("Get_Help_Infrastructure.Data.Models.DeleteType", "DeleteType")
                         .WithMany()
-                        .HasForeignKey("DeleteTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DeleteTypeId");
 
                     b.HasOne("Get_Help_Infrastructure.Data.Models.Ticket", "Ticket")
                         .WithMany("Messages")
@@ -533,9 +535,7 @@ namespace Get_Help_Infrastructure.Migrations
                 {
                     b.HasOne("Get_Help_Infrastructure.Data.Models.DeleteType", "DeleteType")
                         .WithMany()
-                        .HasForeignKey("DeleteTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DeleteTypeId");
 
                     b.Navigation("DeleteType");
                 });
@@ -556,9 +556,7 @@ namespace Get_Help_Infrastructure.Migrations
 
                     b.HasOne("Get_Help_Infrastructure.Data.Models.DeleteType", "DeleteType")
                         .WithMany()
-                        .HasForeignKey("DeleteTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DeleteTypeId");
 
                     b.HasOne("Get_Help_Infrastructure.Data.Models.Topic", "Topic")
                         .WithMany("Tickets")
@@ -579,9 +577,7 @@ namespace Get_Help_Infrastructure.Migrations
                 {
                     b.HasOne("Get_Help_Infrastructure.Data.Models.DeleteType", "DeleteType")
                         .WithMany()
-                        .HasForeignKey("DeleteTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DeleteTypeId");
 
                     b.HasOne("Get_Help_Infrastructure.Data.Models.Service", "Service")
                         .WithMany("Topics")
