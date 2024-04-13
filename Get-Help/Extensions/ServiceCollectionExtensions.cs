@@ -1,4 +1,6 @@
-﻿using Get_Help_Infrastructure.Data;
+﻿using Get_Help.Core.Contracts;
+using Get_Help.Core.Services;
+using Get_Help_Infrastructure.Data;
 using Get_Help_Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +31,13 @@ namespace Microsoft.Extensions.DependencyInjection
             })
             .AddRoles<ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<IHomeService, HomeService>();
 
             return services;
         }
