@@ -21,7 +21,14 @@ namespace Get_Help.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await service.GetAllServices();
+            var model = await service.GetAllServicesAsync();
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Service(int id)
+        {
+            var model = await service.GetAllTopicsByServiceIdAsync(id);
 
             return View(model);
         }

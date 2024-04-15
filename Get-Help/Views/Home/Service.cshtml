@@ -1,0 +1,10 @@
+﻿@model List<TopicModel>
+
+<div class="d-flex flex-column gap-2">
+    @foreach(var topic in Model)
+    {
+        <div class="d-flex border border-primary h-2 justify-content-center">
+            <p class="align-self-center">@topic.Name</p>
+        </div>
+    }
+</div>

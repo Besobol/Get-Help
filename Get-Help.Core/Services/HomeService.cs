@@ -15,7 +15,7 @@ namespace Get_Help.Core.Services
             repository = _repository;
         }
 
-        public async Task<List<ServiceModel>> GetAllServices()
+        public async Task<List<ServiceModel>> GetAllServicesAsync()
         {
             var result = await repository
                 .AllReadOnly<Service>()
@@ -23,7 +23,23 @@ namespace Get_Help.Core.Services
                 {
                     Id = s.Id,
                     Name = s.Name,
-                    ImgUrl = s.ImgUrl
+                    ImgUrl = s.ImgUrl,
+                    TopicCount = s.Topics.Count
+                })
+                .ToListAsync();
+
+            return result;
+        }
+
+        public async Task<List<TopicModel>> GetAllTopicsByServiceIdAsync(int serviceId)
+        {
+            var result = await repository
+                .AllReadOnly<Topic>()
+                .Where(t => t.ServiceId == serviceId)
+                .Select(t => new TopicModel()
+                {
+                    Id= t.Id,
+                    Name = t.Name
                 })
                 .ToListAsync();
 
