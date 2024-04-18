@@ -18,6 +18,10 @@ namespace Get_Help_Infrastructure.Data.Models
         public required string Content { get; set; }
 
         [Required]
+        [Comment("Time of sending the message")]
+        public required DateTime SentTime { get; set; }
+
+        [Required]
         [Comment("Ticket Identifier")]
         public int TicketId { get; set; }
         [ForeignKey(nameof(TicketId))]
