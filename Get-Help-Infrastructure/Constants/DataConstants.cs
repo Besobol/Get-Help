@@ -4,8 +4,7 @@
     {
         public const int DeleteTypeNameMaxLength = 10;
 
-        public const int AgentFirstNameMaxLength = 50;
-        public const int AgentLastNameMaxLength = 50;
+        public const int AgentNameMaxLength = 100;
 
         public const int MessageContentMaxLength = 600;
 

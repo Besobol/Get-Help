@@ -13,14 +13,9 @@ namespace Get_Help_Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(AgentFirstNameMaxLength)]
-        [Comment("Agent First Name")]
-        public required string FirstName { get; set; }
-
-        [Required]
-        [MaxLength(AgentLastNameMaxLength)]
-        [Comment("Agent Last Name")]
-        public required string LastName { get; set; }
+        [MaxLength(AgentNameMaxLength)]
+        [Comment("Agent Name")]
+        public required string Name { get; set; }
 
         [Required]
         [Comment("Agent User Id")]
