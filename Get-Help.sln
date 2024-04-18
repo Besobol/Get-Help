@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Get-Help", "Get-Help\Get-Help.csproj", "{2AA0EA16-A0C9-40A3-B96F-A3D628D38836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Get-Help", "Get-Help\Get-Help.csproj", "{2AA0EA16-A0C9-40A3-B96F-A3D628D38836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Get-Help.Core", "Get-Help.Core\Get-Help.Core.csproj", "{62FCF273-EE80-48CD-94B0-66FCCE1AA8C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Get-Help.Core", "Get-Help.Core\Get-Help.Core.csproj", "{62FCF273-EE80-48CD-94B0-66FCCE1AA8C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Get-Help-Infrastructure", "Get-Help-Infrastructure\Get-Help-Infrastructure.csproj", "{878B8939-4AD4-4CEB-828E-C4541F57AA43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Get-Help.Infrastructure", "Get-Help-Infrastructure\Get-Help.Infrastructure.csproj", "{878B8939-4AD4-4CEB-828E-C4541F57AA43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
