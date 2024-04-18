@@ -6,5 +6,6 @@ namespace Get_Help.Core.Contracts
     {
         Task<List<ServiceModel>> GetAllServicesAsync();
         Task<List<TopicModel>> GetAllTopicsByServiceIdAsync(int serviceId);
+        Task<TicketModel> GetTicketById(int ticketId);
     }
 }

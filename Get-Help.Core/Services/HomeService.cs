@@ -45,5 +45,27 @@ namespace Get_Help.Core.Services
 
             return result;
         }
+
+        public async Task<TicketModel> GetTicketById(int ticketId)
+        {
+            var result = await repository
+                .AllReadOnly<Ticket>()
+                .Where(t => t.Id == ticketId)
+                .Select(t => new TicketModel()
+                {
+                    Id = t.Id,
+                    Topic = t.Topic.Name,
+                    Messages = t.Messages.Select(m => new MessageModel()
+                    {
+                        Content = m.Content,
+                        SenderName = m.Agent == null ? m.Client.User.UserName : m.Agent.Name,
+                        SentTime = TimeOnly.FromDateTime(m.SentTime),
+                        Sender = m.Agent == null ? Enums.MessageSender.client : Enums.MessageSender.agent
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            return result;
+        }
     }
 }

@@ -33,6 +33,13 @@ namespace Get_Help.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Chat(int id)
+        {
+            var model = await service.GetTicketById(id);
+
+            return View(model);
+        }
+
         public IActionResult Privacy()
         {
             return View();

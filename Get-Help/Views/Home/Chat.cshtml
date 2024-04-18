@@ -1,0 +1,24 @@
+﻿@using Get_Help.Core.Enums
+@model List<MessageModel>
+
+<div class="d-flex flex-column">
+    @foreach(var message in Model)
+    {
+        if(message.Sender == MessageSender.client)
+        {
+            <div class="d-flex">
+                <p class="message-sender">@message.Sender</p>
+                <p class="message-text">@message.Content</p>
+                <p class="align-self-end">@message.SentTime</p>
+            </div>
+        }
+        else if(message.Sender == MessageSender.agent)
+        {
+            <div class="d-flex">
+                <p class="message-sender">@message.Sender</p>
+                <p class="message-text">@message.Content</p>
+                <p class="align-self-end">@message.SentTime</p>
+            </div>
+        }
+    }
+</div>
