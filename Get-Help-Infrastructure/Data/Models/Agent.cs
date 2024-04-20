@@ -5,7 +5,6 @@ using static Get_Help_Infrastructure.Constants.DataConstants;
 
 namespace Get_Help_Infrastructure.Data.Models
 {
-    [Comment("Application Agent")]
     public class Agent : ApplicationUser
     {
         [Required]
