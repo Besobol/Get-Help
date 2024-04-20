@@ -3,6 +3,7 @@ using Get_Help.Core.Services;
 using Get_Help.Infrastructure.Data;
 using Get_Help.Infrastructure.Data.Common;
 using Get_Help.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -11,7 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
         {
-            string connectionString = config.GetConnectionString("DefaultConnection");
+            string connectionString = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IRepository, Repository>();
@@ -35,6 +36,9 @@ namespace Microsoft.Extensions.DependencyInjection
             .AddRoles<ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddScoped<SignInManager<Agent>>();
+            services.AddScoped<SignInManager<Client>>();
+
             services.AddIdentityCore<Agent>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddIdentityCore<Client>().AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -44,6 +48,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IAccountService, AccountService>();
 
             return services;
         }
