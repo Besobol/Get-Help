@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using static Get_Help_Infrastructure.Constants.DataConstants;
+using static Get_Help.Infrastructure.Constants.DataConstants;
 
-namespace Get_Help_Infrastructure.Data.Models
+namespace Get_Help.Infrastructure.Data.Models
 {
     [Comment("Delete Type")]
     public class DeleteType

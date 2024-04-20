@@ -1,10 +1,10 @@
-﻿using Get_Help_Infrastructure.Data.Models;
-using Get_Help_Infrastructure.Data.Models.Configuration;
+﻿using Get_Help.Infrastructure.Data.Models;
+using Get_Help.Infrastructure.Data.Models.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Get_Help_Infrastructure.Data
+namespace Get_Help.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {

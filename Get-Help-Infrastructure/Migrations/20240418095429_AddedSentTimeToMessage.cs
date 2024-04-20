@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Get_Help_Infrastructure.Migrations
+namespace Get_Help.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddedSentTimeToMessage : Migration

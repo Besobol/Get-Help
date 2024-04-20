@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static Get_Help_Infrastructure.Constants.DataConstants;
+using static Get_Help.Infrastructure.Constants.DataConstants;
 
-namespace Get_Help_Infrastructure.Data.Models
+namespace Get_Help.Infrastructure.Data.Models
 {
     [Comment("Ticket Message")]
     public class Message

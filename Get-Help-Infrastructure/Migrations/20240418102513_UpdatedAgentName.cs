@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Get_Help_Infrastructure.Migrations
+namespace Get_Help.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class UpdatedAgentName : Migration

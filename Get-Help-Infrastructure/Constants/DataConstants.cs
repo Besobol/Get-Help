@@ -1,4 +1,4 @@
-﻿namespace Get_Help_Infrastructure.Constants
+﻿namespace Get_Help.Infrastructure.Constants
 {
     public static class DataConstants
     {

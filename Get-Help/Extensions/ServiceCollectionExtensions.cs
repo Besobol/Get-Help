@@ -1,8 +1,8 @@
 ﻿using Get_Help.Core.Contracts;
 using Get_Help.Core.Services;
-using Get_Help_Infrastructure.Data;
-using Get_Help_Infrastructure.Data.Common;
-using Get_Help_Infrastructure.Data.Models;
+using Get_Help.Infrastructure.Data;
+using Get_Help.Infrastructure.Data.Common;
+using Get_Help.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection

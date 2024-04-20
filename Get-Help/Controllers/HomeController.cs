@@ -1,6 +1,6 @@
 using Get_Help.Core.Contracts;
 using Get_Help.Models;
-using Get_Help_Infrastructure.Data.Common;
+using Get_Help.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

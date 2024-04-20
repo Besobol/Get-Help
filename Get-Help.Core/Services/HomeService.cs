@@ -1,7 +1,7 @@
 ﻿using Get_Help.Core.Contracts;
 using Get_Help.Core.Models.Home;
-using Get_Help_Infrastructure.Data.Common;
-using Get_Help_Infrastructure.Data.Models;
+using Get_Help.Infrastructure.Data.Common;
+using Get_Help.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Get_Help.Core.Services

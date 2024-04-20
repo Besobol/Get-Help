@@ -1,4 +1,4 @@
-﻿namespace Get_Help_Infrastructure.Data.Common
+﻿namespace Get_Help.Infrastructure.Data.Common
 {
     public interface IRepository
     {

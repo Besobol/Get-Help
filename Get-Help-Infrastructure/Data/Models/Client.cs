@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Get_Help_Infrastructure.Data.Models
+namespace Get_Help.Infrastructure.Data.Models
 {
     public class Client : ApplicationUser
     {

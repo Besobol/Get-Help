@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 
-namespace Get_Help_Infrastructure.Data.Common
+namespace Get_Help.Infrastructure.Data.Common
 {
     public class Repository : IRepository
     {
