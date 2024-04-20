@@ -35,6 +35,9 @@ namespace Microsoft.Extensions.DependencyInjection
             .AddRoles<ApplicationRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddIdentityCore<Agent>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentityCore<Client>().AddEntityFrameworkStores<ApplicationDbContext>();
+
             return services;
         }
 

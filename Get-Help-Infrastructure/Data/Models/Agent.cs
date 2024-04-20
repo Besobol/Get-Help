@@ -6,22 +6,12 @@ using static Get_Help_Infrastructure.Constants.DataConstants;
 namespace Get_Help_Infrastructure.Data.Models
 {
     [Comment("Application Agent")]
-    public class Agent
+    public class Agent : ApplicationUser
     {
-        [Key]
-        [Comment("Agent Identifier")]
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(AgentNameMaxLength)]
         [Comment("Agent Name")]
         public required string Name { get; set; }
-
-        [Required]
-        [Comment("Agent User Id")]
-        public required int UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
-        public ApplicationUser User { get; set; } = null!;
 
         public List<Ticket> Tickets { get; set; } = new();
 

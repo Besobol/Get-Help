@@ -1,4 +1,4 @@
-﻿using Get_Help.Core.Models;
+﻿using Get_Help.Core.Models.Home;
 
 namespace Get_Help.Core.Contracts
 {

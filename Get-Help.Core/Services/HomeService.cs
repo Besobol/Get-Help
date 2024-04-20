@@ -1,5 +1,5 @@
 ﻿using Get_Help.Core.Contracts;
-using Get_Help.Core.Models;
+using Get_Help.Core.Models.Home;
 using Get_Help_Infrastructure.Data.Common;
 using Get_Help_Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -58,7 +58,7 @@ namespace Get_Help.Core.Services
                     Messages = t.Messages.Select(m => new MessageModel()
                     {
                         Content = m.Content,
-                        SenderName = m.Agent == null ? m.Client.User.UserName : m.Agent.Name,
+                        SenderName = m.Agent == null ? m.Client.UserName : m.Agent.Name,
                         SentTime = TimeOnly.FromDateTime(m.SentTime),
                         Sender = m.Agent == null ? Enums.MessageSender.client : Enums.MessageSender.agent
                     }).ToList()
