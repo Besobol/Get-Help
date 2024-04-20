@@ -1,6 +1,6 @@
 ﻿using Get_Help.Core.Enums;
 
-namespace Get_Help.Core.Models
+namespace Get_Help.Core.Models.Home
 {
     public class MessageModel
     {

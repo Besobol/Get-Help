@@ -1,4 +1,4 @@
-﻿namespace Get_Help.Core.Models
+﻿namespace Get_Help.Core.Models.Home
 {
     public class TicketModel
     {
