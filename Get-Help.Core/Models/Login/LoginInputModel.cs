@@ -5,11 +5,11 @@ namespace Get_Help.Core.Models.Login
     public class LoginInputModel
     {
         [Required]
-        public required string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]
-        public required string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
