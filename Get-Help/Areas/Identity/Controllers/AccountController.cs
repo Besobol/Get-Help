@@ -1,6 +1,8 @@
-﻿using Get_Help.Core.Contracts;
+﻿using Get_Help.Attributes.ActionFilterAttributes;
+using Get_Help.Core.Contracts;
 using Get_Help.Core.Models.Login;
 using Get_Help.Core.Models.Register;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Get_Help.Areas.Identity.Controllers
@@ -16,13 +18,16 @@ namespace Get_Help.Areas.Identity.Controllers
         }
 
         [HttpGet]
+        [AnonymousOnly]
         public IActionResult Login()
         {
+            var model = new LoginInputModel();
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]
+        [AnonymousOnly]
         public async Task<IActionResult> Login(LoginInputModel model)
         {
 
@@ -37,6 +42,7 @@ namespace Get_Help.Areas.Identity.Controllers
         }
 
         [HttpGet]
+        [AnonymousOnly]
         public IActionResult Register()
         {
             var model = new RegisterInputModel();
@@ -45,6 +51,7 @@ namespace Get_Help.Areas.Identity.Controllers
         }
 
         [HttpPost]
+        [AnonymousOnly]
         public async Task<IActionResult> Register(RegisterInputModel model)
         {
             if (!ModelState.IsValid)

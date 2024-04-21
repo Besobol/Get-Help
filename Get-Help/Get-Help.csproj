@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Get-Help.Core\Get-Help.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Views\Shared\" />
+  </ItemGroup>
+
 </Project>
