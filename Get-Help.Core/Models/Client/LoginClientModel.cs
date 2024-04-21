@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Get_Help.Core.Models.Login
+namespace Get_Help.Core.Models.Client
 {
-    public class LoginInputModel
+    public class LoginClientModel
     {
         [Required]
         public string Username { get; set; } = string.Empty;

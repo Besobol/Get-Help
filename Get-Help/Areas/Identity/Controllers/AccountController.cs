@@ -1,7 +1,6 @@
 ﻿using Get_Help.Attributes.ActionFilterAttributes;
 using Get_Help.Core.Contracts;
-using Get_Help.Core.Models.Login;
-using Get_Help.Core.Models.Register;
+using Get_Help.Core.Models.Client;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,14 +20,14 @@ namespace Get_Help.Areas.Identity.Controllers
         [AnonymousOnly]
         public IActionResult Login()
         {
-            var model = new LoginInputModel();
+            var model = new LoginClientModel();
 
             return View(model);
         }
 
         [HttpPost]
         [AnonymousOnly]
-        public async Task<IActionResult> Login(LoginInputModel model)
+        public async Task<IActionResult> Login(LoginClientModel model)
         {
 
             if (!ModelState.IsValid)
@@ -45,14 +44,14 @@ namespace Get_Help.Areas.Identity.Controllers
         [AnonymousOnly]
         public IActionResult Register()
         {
-            var model = new RegisterInputModel();
+            var model = new RegisterClientModel();
 
             return View(model);
         }
 
         [HttpPost]
         [AnonymousOnly]
-        public async Task<IActionResult> Register(RegisterInputModel model)
+        public async Task<IActionResult> Register(RegisterClientModel model)
         {
             if (!ModelState.IsValid)
             {

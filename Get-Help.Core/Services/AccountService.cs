@@ -1,6 +1,5 @@
 ﻿using Get_Help.Core.Contracts;
-using Get_Help.Core.Models.Login;
-using Get_Help.Core.Models.Register;
+using Get_Help.Core.Models.Client;
 using Get_Help.Infrastructure.Data.Common;
 using Get_Help.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -9,32 +8,28 @@ namespace Get_Help.Core.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly SignInManager<Agent> agentSignInManager;
+
         private readonly SignInManager<Client> clientSignInManager;
-        private readonly UserManager<Agent> agentUserManager;
         private readonly UserManager<Client> clientUserManager;
         private readonly IRepository repository;
 
         public AccountService(
-            SignInManager<Agent> _agentSignInManager,
+
             SignInManager<Client> _clientSignInManager,
-            UserManager<Agent> _agentUserManager,
             UserManager<Client> _clientUserManager,
             IRepository _repository)
         {
-            agentSignInManager = _agentSignInManager;
             clientSignInManager = _clientSignInManager;
-            agentUserManager = _agentUserManager;
             clientUserManager = _clientUserManager;
             repository = _repository;
         }
 
-        public async Task<SignInResult> SignInClientAsync(LoginInputModel input)
+        public async Task<SignInResult> SignInClientAsync(LoginClientModel input)
         {
             return await clientSignInManager.PasswordSignInAsync(input.Username, input.Password, input.RememberMe, lockoutOnFailure: false);
         }
 
-        public async Task<IdentityResult> RegisterClientUser(RegisterInputModel input)
+        public async Task<IdentityResult> RegisterClientUser(RegisterClientModel input)
         {
             var user = CreateUser<Client>();
 
