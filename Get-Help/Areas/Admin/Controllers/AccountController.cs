@@ -2,27 +2,23 @@
 using Get_Help.Core.Contracts;
 using Get_Help.Core.Models.Admin;
 using Get_Help.Core.Models.Agent;
-using Get_Help.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Get_Help.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[AllowAdmin]
     public class AccountController : Controller
     {
         private readonly IAdminService adminService;
-        private readonly IAgentService agentService;
 
         public AccountController(
-            IAdminService _adminService,
-            IAgentService _agentService)
+            IAdminService _adminService)
         {
             adminService = _adminService;
-            agentService = _agentService;
         }
 
-        public async Task<IActionResult> LoginAdmin()
+        public IActionResult Login()
         {
             var model = new LoginAdminModel();
 
@@ -30,7 +26,7 @@ namespace Get_Help.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginAdmin(LoginAdminModel input)
+        public async Task<IActionResult> Login(LoginAdminModel input)
         {
             if (!ModelState.IsValid)
             {
@@ -44,99 +40,14 @@ namespace Get_Help.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("Index", "Account", new { area = "Admin"});
+            return RedirectToAction("Index", "Home", new { area = "Admin"});
         }
 
-        public async Task<IActionResult> LoginAgent()
+        public async Task<IActionResult> Logout()
         {
-            AgentLoginModel model = new();
+            await adminService.Logout();
 
-            return View(model);
+            return RedirectToAction("Index", "Home", new { area = ""});
         }
-
-        [HttpPost]
-        public async Task<IActionResult> LoginAgent(AgentLoginModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            var loginResult = await agentService.SignInClientAsync(model);
-
-            if (!loginResult.Succeeded)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            return RedirectToAction("Service", "Home", new {area = ""});
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Agents()
-        {
-            return View();
-        }
-
-        public IActionResult Services()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AddService()
-        {
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public IActionResult AddTopic()
-        {
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public IActionResult RegisterAgent()
-        {
-            var model = new RegisterAgentModel();
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> RegisterAgent(RegisterAgentModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            var createdResult = await adminService.RegisterAgent(model);
-
-            if (!createdResult.Succeeded)
-            {
-                foreach (var error in createdResult.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        public IActionResult Logout()
-        {
-            return View();
-        }
-
     }
 }
