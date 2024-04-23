@@ -5,6 +5,7 @@ namespace Get_Help.Core.Contracts
 {
     public interface IAgentService
     {
-        Task<SignInResult> SignInClientAsync(AgentLoginModel input);
+        Task<SignInResult> SignInClientAsync(LoginAgentModel input);
+        Task Logout();
     }
 }
