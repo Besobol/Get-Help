@@ -146,7 +146,7 @@ namespace Get_Help.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeleteTypes", t =>
+                    b.ToTable("DeleteTypes", null, t =>
                         {
                             t.HasComment("Delete Type");
                         });
@@ -197,7 +197,7 @@ namespace Get_Help.Infrastructure.Migrations
 
                     b.HasIndex("TicketId");
 
-                    b.ToTable("Messages", t =>
+                    b.ToTable("Messages", null, t =>
                         {
                             t.HasComment("Ticket Message");
                         });
@@ -231,7 +231,7 @@ namespace Get_Help.Infrastructure.Migrations
 
                     b.HasIndex("DeleteTypeId");
 
-                    b.ToTable("Services", t =>
+                    b.ToTable("Services", null, t =>
                         {
                             t.HasComment("Service");
                         });
@@ -280,7 +280,7 @@ namespace Get_Help.Infrastructure.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("Ticket", t =>
+                    b.ToTable("Ticket", null, t =>
                         {
                             t.HasComment("Ticket");
                         });
@@ -315,7 +315,7 @@ namespace Get_Help.Infrastructure.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("Topics", t =>
+                    b.ToTable("Topics", null, t =>
                         {
                             t.HasComment("Service Topic");
                         });

@@ -7,7 +7,8 @@ namespace Get_Help.Infrastructure.Data.Models.Configuration
     {
         public void Configure(EntityTypeBuilder<Client> builder)
         {
-            
+            builder.Property(c => c.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }
