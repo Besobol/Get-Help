@@ -33,14 +33,17 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 8;
             })
-            .AddRoles<ApplicationRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddRoles<ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<SignInManager<Agent>>();
             services.AddScoped<SignInManager<Client>>();
 
-            services.AddIdentityCore<Agent>().AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddIdentityCore<Client>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentityCore<Agent>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentityCore<Client>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             return services;
         }
@@ -49,6 +52,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IAgentService, AgentService>();
 
             return services;
         }

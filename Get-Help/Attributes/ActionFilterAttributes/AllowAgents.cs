@@ -1,6 +1,8 @@
 ﻿using Get_Help.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Runtime.CompilerServices;
 
 namespace Get_Help.Attributes.ActionFilterAttributes
 {
@@ -8,14 +10,12 @@ namespace Get_Help.Attributes.ActionFilterAttributes
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            base.OnActionExecuting(context);
-
-            bool isAgent = context.HttpContext.User is Agent;
-
-            if (!isAgent)
+            var user = context.HttpContext.User;
+            var userManager = context.HttpContext.RequestServices.GetService<UserManager<Agent>>();
+            var agentUser = userManager.GetUserAsync(user).Result;
+            if (agentUser == null)
             {
-                // return 404 to unauthorized for safety
-                context.Result = new StatusCodeResult(StatusCodes.Status404NotFound);
+                context.Result = new ForbidResult();
             }
         }
     }
