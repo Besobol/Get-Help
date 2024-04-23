@@ -9,6 +9,10 @@ namespace Get_Help.Infrastructure.Data.Models.Configuration
         {
             builder.Property(c => c.Id)
                 .ValueGeneratedOnAdd();
+
+            builder.HasMany(c => c.Tickets)
+                .WithOne(t => t.Client)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
