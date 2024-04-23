@@ -5,6 +5,7 @@ namespace Get_Help.Core.Contracts
 {
     public interface IAdminService
     {
+        Task<SignInResult> LoginAdmin(LoginAdminModel input);
         Task<IdentityResult> RegisterAgent(RegisterAgentModel input); 
     }
 }

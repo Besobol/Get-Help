@@ -22,6 +22,31 @@ namespace Get_Help.Areas.Admin.Controllers
             agentService = _agentService;
         }
 
+        public async Task<IActionResult> LoginAdmin()
+        {
+            var model = new LoginAdminModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LoginAdmin(LoginAdminModel input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var loginResult = await adminService.LoginAdmin(input);
+
+            if (!loginResult.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index", "Account", new { area = "Admin"});
+        }
+
         public async Task<IActionResult> LoginAgent()
         {
             AgentLoginModel model = new();
@@ -37,9 +62,9 @@ namespace Get_Help.Areas.Admin.Controllers
                 return View();
             }
 
-            var createdResult = await agentService.SignInClientAsync(model);
+            var loginResult = await agentService.SignInClientAsync(model);
 
-            if (!createdResult.Succeeded)
+            if (!loginResult.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
             }

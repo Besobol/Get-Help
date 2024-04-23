@@ -11,15 +11,23 @@ namespace Get_Help.Core.Services
         private readonly SignInManager<Agent> agentSignInManager;
         private readonly UserManager<Agent> agentUserManager;
         private readonly IRepository repository;
+        private readonly SignInManager<ApplicationUser> adminSignInManager;
 
         public AdminService(
             SignInManager<Agent> _agentSignInManager,
             UserManager<Agent> _agentUserManager,
-            IRepository _repository)
+            IRepository _repository,
+            SignInManager<ApplicationUser> _adminSignInManager)
         {
             agentSignInManager = _agentSignInManager;
             agentUserManager = _agentUserManager;
             repository = _repository;
+            adminSignInManager = _adminSignInManager;
+        }
+
+        public async Task<SignInResult> LoginAdmin(LoginAdminModel input)
+        {
+            return await adminSignInManager.PasswordSignInAsync(input.Email, input.Password, false, lockoutOnFailure: false);
         }
 
         public async Task<IdentityResult> RegisterAgent(RegisterAgentModel input)
