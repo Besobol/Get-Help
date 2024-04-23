@@ -1,0 +1,26 @@
+﻿@using Get_Help.Core.Models.Admin
+@model EditServiceModel
+
+<section>
+    <form id="registerForm" method="post">
+        <h2>Create new Service</h2>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        <div class="form-floating mb-3">
+            <input hidden asp-for="@Model.Id" class="form-control" aria-required="true" placeholder="Id" />
+            <label asp-for="@Model.Id">Name</label>
+            <span asp-validation-for="@Model.Id" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="@Model.Name" class="form-control" aria-required="true" placeholder="Name" />
+            <label asp-for="@Model.Name">Name</label>
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input asp-for="@Model.ImgUrl" class="form-control" aria-required="true" placeholder="/Images/ServiceImages/imageName.png" />
+            <label asp-for="@Model.ImgUrl">/Images/ServiceImages/imageName.png</label>
+            <span asp-validation-for="@Model.ImgUrl" class="text-danger"></span>
+        </div>
+        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Edit</button>
+    </form>
+</section>

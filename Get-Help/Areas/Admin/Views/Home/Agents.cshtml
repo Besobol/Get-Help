@@ -1,0 +1,23 @@
+﻿@using Get_Help.Core.Models.Admin
+@model List<AgentListViewModel>
+
+@{
+    ViewData["Title"] = "Agents";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<section class="my-4">
+    <a class="btn btn-primary" asp-action="RegisterAgent">Create Agent</a>
+</section>
+
+<section class="d-flex flex-column gap-2">
+    @foreach (var agent in Model)
+    {
+        <a class="border border-primary d-block p-2" asp-action="Agent" asp-route-id="@agent.Id" >@agent.Name</a>
+    }
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

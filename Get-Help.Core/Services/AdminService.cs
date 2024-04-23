@@ -1,8 +1,11 @@
 ﻿using Get_Help.Core.Contracts;
+using Get_Help.Core.Models;
 using Get_Help.Core.Models.Admin;
+using Get_Help.Core.Models.Home;
 using Get_Help.Infrastructure.Data.Common;
 using Get_Help.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Get_Help.Core.Services
 {
@@ -11,23 +14,23 @@ namespace Get_Help.Core.Services
         private readonly SignInManager<Agent> agentSignInManager;
         private readonly UserManager<Agent> agentUserManager;
         private readonly IRepository repository;
-        private readonly SignInManager<ApplicationUser> adminSignInManager;
+        private readonly SignInManager<ApplicationUser> userManager;
 
         public AdminService(
             SignInManager<Agent> _agentSignInManager,
             UserManager<Agent> _agentUserManager,
             IRepository _repository,
-            SignInManager<ApplicationUser> _adminSignInManager)
+            SignInManager<ApplicationUser> _signInManager)
         {
             agentSignInManager = _agentSignInManager;
             agentUserManager = _agentUserManager;
             repository = _repository;
-            adminSignInManager = _adminSignInManager;
+            userManager = _signInManager;
         }
 
         public async Task<SignInResult> LoginAdmin(LoginAdminModel input)
         {
-            return await adminSignInManager.PasswordSignInAsync(input.Email, input.Password, false, lockoutOnFailure: false);
+            return await userManager.PasswordSignInAsync(input.Email, input.Password, false, lockoutOnFailure: false);
         }
 
         public async Task<IdentityResult> RegisterAgent(RegisterAgentModel input)
@@ -45,6 +48,125 @@ namespace Get_Help.Core.Services
             user.Id = 0;
 
             return await agentUserManager.CreateAsync(user, input.Password);
+        }
+
+        public async Task<List<AgentListViewModel>> GerAgents()
+        {
+            var result = await repository.AllReadOnly<Agent>()
+                .Select(a => new AgentListViewModel()
+                {
+                    Id = a.Id,
+                    Name = a.Name
+                })
+                .ToListAsync();
+
+            return result;
+        }
+
+        public async Task<AgentViewModel> GetAgentById(int id)
+        {
+            var result = await repository.AllReadOnly<Agent>()
+                .Where(a => a.Id == id)
+                .Select(a => new AgentViewModel()
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    Email = a.Email
+                })
+                .FirstOrDefaultAsync();
+
+            return result;
+        }
+
+        public async Task<IdentityResult> DeleteAgentById(int id)
+        {
+            Agent agent = await agentUserManager.FindByIdAsync(id.ToString());
+
+            return await agentUserManager.DeleteAsync(agent);
+        }
+
+        public async Task<IdentityResult> ChangeAgentPasswordById(int id, string newPass)
+        {
+            Agent agent = await agentUserManager.FindByIdAsync(id.ToString());
+
+            if (agent == null)
+            {
+                return IdentityResult.Failed(
+                    new IdentityError()
+                    {
+                        Description = $"Failed to find Agent with Id = {id}"
+                    });
+            }
+
+            var hasher = new PasswordHasher<Agent>();
+
+            agent.PasswordHash = hasher.HashPassword(agent, newPass);
+            
+            return await agentUserManager.UpdateSecurityStampAsync(agent);
+        }
+
+        public async Task<List<ServiceModel>> GetAllServices()
+        {
+            var model = await repository.AllReadOnly<Service>()
+                .Select(s => new ServiceModel()
+                {
+                    Id=s.Id,
+                    Name = s.Name,
+                    ImgUrl = s.ImgUrl,
+                    TopicCount = s.Topics.Count
+                })
+                .ToListAsync();
+
+            return model;
+        }
+
+        public async Task AddNewService(AddServiceModel model)
+        {
+            var service = new Service()
+            {
+                Name = model.Name,
+                ImgUrl = model.ImgUrl,
+            };
+
+            await repository.AddAsync(service);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task EditService(EditServiceModel model)
+        {
+            var service = await repository.All<Service>()
+                .Where(s => s.Id == model.Id)
+                .FirstOrDefaultAsync();
+
+            service.Name = model.Name;
+            service.ImgUrl = model.ImgUrl;
+
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<EditServiceModel> GetServiceById(int id)
+        {
+            var model = await repository.AllReadOnly<Service>()
+                .Where(s => s.Id == id)
+                .Select(s => new EditServiceModel()
+                {
+                    Name = s.Name,
+                    ImgUrl = s.ImgUrl,
+                })
+                .FirstOrDefaultAsync();
+
+            return model;
+        }
+
+        public async Task DeleteServiceById(int Id)
+        {
+            await repository.DeleteAsync<Service>(Id);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task Logout()
+        {
+            await userManager.SignOutAsync();
         }
 
         private T CreateUser<T>() where T : ApplicationUser

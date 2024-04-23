@@ -3,17 +3,11 @@ using static Get_Help.Core.Constants.FieldConstants;
 
 namespace Get_Help.Core.Models.Admin
 {
-    public class RegisterAgentModel
+    public class ChangePasswordAgentModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; } = string.Empty;
-
-        [Required]
-        [Display(Name = "Name")]
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-
+        public string Email { get; set; } = string.Empty;
         [Required]
         [DataType(DataType.Password)]
         [StringLength(

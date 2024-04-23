@@ -1,0 +1,11 @@
+﻿@using Get_Help.Core.Models.Admin
+@model AgentViewModel
+
+<section class="d-flex flex-column gap-2">
+    <div>@Model.Name</div>
+    <div>@Model.Email</div>
+    <div>
+        <a class="btn btn-warning" asp-action="DeleteAgentById" asp-route-id="@Model.Id">Delete</a>
+        <a class="btn btn-secondary" asp-action="ChangeAgentPassword" asp-route-id="@Model.Id">Change Password</a>
+    </div>
+</section>

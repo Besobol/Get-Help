@@ -1,0 +1,26 @@
+﻿@model List<ServiceModel>
+
+@{
+    ViewData["Title"] = "Services";
+}
+
+<a class="btn btn-primary my-4" asp-action="AddService">Add Service</a>
+<div class="d-flex flex-column gap-2">
+    @foreach (var service in Model)
+    {
+        <div class="row">
+            <a asp-action="Service" asp-route-id="@service.Id" class="border border-primary d-block col-11 px-0">
+                <div class="h-5 d-flex flex gap-2">
+                    <img class="d-block img-fluid" src="@service.ImgUrl" />
+                    <p class="align-self-center">@service.Name</p>
+                    <div class="mx-auto flex-fill"></div>
+                    <p class="align-self-center counter-end">@service.TopicCount Topics</p>
+                </div>
+            </a>
+            <div class="d-flex flex-column gap-1 col-1">
+                <a class="btn btn-secondary align-self-center" asp-action="EditService" asp-route-id="@service.Id">Edit</a>
+                <a class="btn btn-danger align-self-center" asp-action="DeleteService" asp-route-id="@service.Id">Delete</a>
+            </div>
+        </div>
+    }
+</div>
