@@ -1,4 +1,5 @@
-using Get_Help.Attributes.AuthorizationFilters;
+
+using Get_Help.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,6 @@ builder.Services.AddApplicationIdentity(builder.Configuration);
 
 builder.Services.AddControllersWithViews(options =>
 {
-    options.Filters.Add<AllowAgent>();
 });
 
 builder.Services.AddApplicationServices();
@@ -41,4 +41,6 @@ app.UseEndpoints(endpoints =>
 });
 #pragma warning restore ASP0014
 
-app.Run();
+await app.CreateAdminRoleAsync();
+
+await app.RunAsync();
