@@ -1,6 +1,5 @@
 using Get_Help.Core.Contracts;
 using Get_Help.Models;
-using Get_Help.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,14 +7,11 @@ namespace Get_Help.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> logger;
         private readonly IHomeService service;
 
         public HomeController(
-            ILogger<HomeController> _logger,
             IHomeService _service)
         {
-            logger = _logger;
             service = _service;
         }
 

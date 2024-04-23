@@ -1,1 +1,17 @@
 ﻿
+
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<section class="d-flex flex-column gap-2">
+    <a class="border border-primary d-block align-self-center p-2 w-25 text-center" asp-action="Agents">Agents</a>
+    <a class="border border-primary d-block align-self-center p-2 w-25 text-center" asp-action="Services">Services</a>
+    <a class="border border-primary d-block align-self-center p-2 w-25 text-center" asp-action="ChangeAdminPassword">Change admin password</a>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

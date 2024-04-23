@@ -3,6 +3,7 @@ using Get_Help.Core.Models.Client;
 using Get_Help.Infrastructure.Data.Common;
 using Get_Help.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Get_Help.Core.Services
 {
@@ -14,7 +15,6 @@ namespace Get_Help.Core.Services
         private readonly IRepository repository;
 
         public AccountService(
-
             SignInManager<Client> _clientSignInManager,
             UserManager<Client> _clientUserManager,
             IRepository _repository)
@@ -34,8 +34,16 @@ namespace Get_Help.Core.Services
             var user = CreateUser<Client>();
 
             await clientUserManager.SetUserNameAsync(user, input.Username);
+
+            user.Id = int.MaxValue;
+
             await clientUserManager.SetEmailAsync(user, input.Email);
-            return await clientUserManager.CreateAsync(user, input.Password);
+
+            user.Id = 0;
+
+            var result = await clientUserManager.CreateAsync(user, input.Password);
+            
+            return result;
         }
 
         private T CreateUser<T>() where T : ApplicationUser
