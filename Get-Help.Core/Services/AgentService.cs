@@ -8,23 +8,28 @@ namespace Get_Help.Core.Services
 {
     public class AgentService : IAgentService
     {
-        private readonly SignInManager<Agent> agentSignInManager;
-        private readonly UserManager<Agent> agentUserManager;
+        private readonly SignInManager<Agent> signInManager;
+        private readonly UserManager<Agent> userManager;
         private readonly IRepository repository;
 
         public AgentService(
-            SignInManager<Agent> _agentSignInManager,
-            UserManager<Agent> _agentUserManager,
+            SignInManager<Agent> _signInManager,
+            UserManager<Agent> _userManager,
             IRepository _repository)
         {
-            agentSignInManager = _agentSignInManager;
-            agentUserManager = _agentUserManager;
+            signInManager = _signInManager;
+            userManager = _userManager;
             repository = _repository;
         }
 
-        public async Task<SignInResult> SignInClientAsync(AgentLoginModel input)
+        public async Task<SignInResult> SignInClientAsync(LoginAgentModel input)
         {
-            return await agentSignInManager.PasswordSignInAsync(input.Email, input.Password, false, lockoutOnFailure: false);
+            return await signInManager.PasswordSignInAsync(input.Email, input.Password, false, lockoutOnFailure: false);
+        }
+
+        public async Task Logout()
+        {
+            await signInManager.SignOutAsync();
         }
     }
 }
