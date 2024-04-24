@@ -11,5 +11,9 @@
         public const int ServiceNameMaxLength = 50;
 
         public const int TopicNameMaxLength = 150;
+
+        public const int ForumPostContentLength = 2000;
+
+        public const int ForumTopicTitleLength = 150;
     }
 }

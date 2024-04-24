@@ -40,5 +40,6 @@ app.UseEndpoints(endpoints =>
 #pragma warning restore ASP0014
 
 await app.CreateAdminRoleAsync();
+await app.CreateForumUserAsync();
 
 await app.RunAsync();

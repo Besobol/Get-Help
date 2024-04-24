@@ -1,5 +1,6 @@
 ﻿using Get_Help.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Data;
 
 namespace Get_Help.Extensions
 {
@@ -20,7 +21,7 @@ namespace Get_Help.Extensions
                 ApplicationRole role;
                 ApplicationUser admin;
 
-                if (await roleManager.RoleExistsAsync(adminRole) == false) 
+                if (await roleManager.RoleExistsAsync(adminRole) == false)
                 {
                     role = new ApplicationRole(adminRole);
                     await roleManager.CreateAsync(role);
@@ -52,6 +53,22 @@ namespace Get_Help.Extensions
                 }
             }
 
+        }
+        public static async Task CreateForumUserAsync(this IApplicationBuilder app)
+        {
+            string roleName = "ForumUser";
+
+            using var scope = app.ApplicationServices.CreateScope();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+
+            if (roleManager != null)
+            {
+                if (await roleManager.RoleExistsAsync(roleName) == false)
+                {
+                    var role = new ApplicationRole(roleName);
+                    await roleManager.CreateAsync(role);
+                }
+            }
         }
     }
 }

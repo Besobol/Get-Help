@@ -54,6 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IAgentService, AgentService>();
+            services.AddScoped<IForumService, ForumService>();
 
             return services;
         }
