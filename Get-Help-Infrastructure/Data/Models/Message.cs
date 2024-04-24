@@ -28,7 +28,7 @@ namespace Get_Help.Infrastructure.Data.Models
         public Ticket Ticket { get; set; } = null!;
 
         [Comment("Agent Identifier")]
-        public int AgentId { get; set; }
+        public int? AgentId { get; set; }
         [ForeignKey(nameof(AgentId))]
         public Agent? Agent { get; set; }
 

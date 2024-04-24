@@ -12,7 +12,7 @@ namespace Get_Help.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Comment("Agent Identifier")]
-        public int AgentId { get; set; }
+        public int? AgentId { get; set; }
         [ForeignKey(nameof(AgentId))]
         public Agent? Agent { get; set; }
 
