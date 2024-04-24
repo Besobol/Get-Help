@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Get-Help-Infrastructure\Get-Help.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Share\" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Get_Help.Infrastructure.Data.Models
+@using Get_Help.Core.Models.Home
+@inject SignInManager<Client> ClientSignInManager
+@model List<TopicModel>
+
+<div class="d-flex flex-column gap-2">
+    @if (!ClientSignInManager.IsSignedIn(User))
+    {
+        @foreach (var topic in Model)
+        {
+            <a asp-area="Identity" asp-controller="Account" asp-action="Login" class="d-flex border border-primary h-2 justify-content-center">
+                <p class="align-self-center">@topic.Name</p>
+            </a>
+        }
+    }
+    else
+    {
+        @foreach (var topic in Model)
+        {
+            if (topic.TicketId != null)
+            {
+                <a asp-action="Chat" asp-route-id="@topic.TicketId" class="d-flex border border-primary h-2 justify-content-center">
+                    <p class="align-self-center">@topic.Name</p>
+                </a>
+            }
+            else
+            {
+                <a asp-action="OpenTicket" asp-route-id="@topic.Id" class="d-flex border border-primary h-2 justify-content-center">
+                    <p class="align-self-center">@topic.Name</p>
+                </a>
+            }
+        }
+    }
+
+
+</div>

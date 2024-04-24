@@ -1,7 +1,7 @@
 using Get_Help.Core.Contracts;
-using Get_Help.Models;
+using Get_Help.Core.Models.Home;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Get_Help.Controllers
 {
@@ -22,18 +22,59 @@ namespace Get_Help.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Service(int id)
+        public async Task<IActionResult> Topics(int id)
         {
-            var model = await service.GetAllTopicsByServiceIdAsync(id);
+            List<TopicModel> model;
+
+            if (User != null)
+            {
+                var userId = GetUserId();
+                model = await service.GetAllTopicsByServiceIdAsync(id, true, userId);
+            }
+            else
+            {
+                model = await service.GetAllTopicsByServiceIdAsync(id, false);
+            }
 
             return View(model);
         }
 
+        public async Task<IActionResult> OpenTicket(int id)
+        {
+            var userId = GetUserId();
+
+            await service.OpenNewTicket(id, userId);
+
+            var ticket = await service.GetTicketIdByTopicId(userId, id);
+
+            return RedirectToAction("Chat", new { id = ticket });
+        }
+
         public async Task<IActionResult> Chat(int id)
         {
-            var model = await service.GetTicketById(id);
+            var ticket = await service.GetTicketById(id);
 
-            return View(model);
+            return View(ticket);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendTicketMessage([FromForm]TicketMessageFormModel message)
+        {
+            var userId = GetUserId();
+
+            await service.SendMessage(message, userId);
+
+            return RedirectToAction("Chat", new { id = message.TicketId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CloseTicket(int id)
+        {
+            var userId = GetUserId();
+
+            await service.CloseTicket(id, userId);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
@@ -41,10 +82,10 @@ namespace Get_Help.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        private int GetUserId()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
         }
+
     }
 }

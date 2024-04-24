@@ -8,7 +8,7 @@
     @foreach (var service in Model)
     {
         <div>
-            <a asp-action="Service" asp-route-id="@service.Id" class="border border-primary d-block">
+            <a asp-action="Topics" asp-route-id="@service.Id" class="border border-primary d-block">
                 <div class="h-5 d-flex flex gap-2">
                     <img class="d-block img-fluid" src="@service.ImgUrl" />
                     <p class="align-self-center">@service.Name</p>

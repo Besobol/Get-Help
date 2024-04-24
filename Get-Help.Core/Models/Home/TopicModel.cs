@@ -4,5 +4,6 @@
     {
         public required int Id { get; set; }
         public required string Name { get; set; }
+        public int? TicketId { get; set; }
     }
 }

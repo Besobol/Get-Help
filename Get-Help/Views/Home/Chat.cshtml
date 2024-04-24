@@ -1,24 +1,38 @@
 ﻿@using Get_Help.Core.Enums
-@model List<MessageModel>
+@model TicketModel
+
+<a class="btn btn-info" asp-action="CloseTicket" asp-route-id="@Model.Id">Close Ticket</a>
 
 <div class="d-flex flex-column">
-    @foreach(var message in Model)
+    @foreach(var message in Model.Messages)
     {
         if(message.Sender == MessageSender.client)
         {
             <div class="d-flex">
-                <p class="message-sender">@message.Sender</p>
-                <p class="message-text">@message.Content</p>
-                <p class="align-self-end">@message.SentTime</p>
+                <p class="message-sender">@message.SenderName:</p>
+                <p class="message-text mx-2 flex-shrink-1 text-break">@message.Content</p>
+                <p class="align-self-end ml-auto flex-shrink-0">@message.SentTime</p>
             </div>
         }
         else if(message.Sender == MessageSender.agent)
         {
             <div class="d-flex">
-                <p class="message-sender">@message.Sender</p>
-                <p class="message-text">@message.Content</p>
-                <p class="align-self-end">@message.SentTime</p>
+                <p class="message-sender">@message.SenderName:</p>
+                <p class="message-text ml-2">@message.Content</p>
+                <p class="align-self-end ml-auto">@message.SentTime</p>
             </div>
         }
     }
 </div>
+
+<form asp-action="SendTicketMessage" method="post">
+    <div class="form-floating mb-3">
+        <input hidden name="TicketId" class="w-100" value="@Model.Id"/>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea name="MessageContent" class="w-100"></textarea>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </div>
+</form>
