@@ -32,6 +32,11 @@ namespace Get_Help.Infrastructure.Data.Common
             await DbSet<T>().AddAsync(entity);
         }
 
+        public void Dethatch<T>(T entity) where T : class
+        {
+            context.Entry(entity).State = EntityState.Detached;
+        }
+
         public async Task<T?> GetByIdAsync<T>(object id) where T : class
         {
             return await DbSet<T>().FindAsync(id);
