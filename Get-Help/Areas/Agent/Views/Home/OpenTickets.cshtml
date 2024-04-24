@@ -1,0 +1,22 @@
+﻿@using Get_Help.Core.Models.Agent
+@model List<OpenTicketViewModel>
+
+@{
+    ViewData["Title"] = "Topics";
+}
+
+<div class="d-flex flex-column gap-2">
+    @foreach (var ticket in Model)
+    {
+        <a asp-action="Chat" asp-route-id="@ticket.TicketId">
+            <div class="d-block col-11 px-0 align-self-center">
+                <div class="d-flex border border-primary h-2 justify-content-center">
+                    <p class="align-self-center mx-4">@ticket.TopicName</p>
+                    <p class="align-self-center mx-4">@ticket.ClientUserName</p>
+                    <div class="mx-auto flex-fill"></div>
+                    <p class="align-self-center mx-4">@ticket.TimeSinceLastMessage.TotalMinutes.ToString("0") Minutes</p>
+                </div>
+            </div>
+        </a>
+    }
+</div>

@@ -1,0 +1,21 @@
+﻿@using Get_Help.Core.Models.Agent
+@model List<AgentTopicModel>
+
+@{
+    ViewData["Title"] = "Topics";
+}
+
+<div class="d-flex flex-column gap-2">
+    @foreach (var topic in Model)
+    {
+        <a asp-action="ClaimTicketByTopicId" asp-route-id="@topic.Id">
+            <div class="d-block col-11 px-0 align-self-center">
+                <div class="d-flex border border-primary h-2 justify-content-center">
+                    <p class="align-self-center mx-4">@topic.Name</p>
+                    <div class="mx-auto flex-fill"></div>
+                    <p class="align-self-center mx-4">@topic.UnclaimedTickets Unclaimed tickets</p>
+                </div>
+            </div>
+        </a>
+    }
+</div>
