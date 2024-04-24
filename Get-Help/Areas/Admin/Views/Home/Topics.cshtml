@@ -1,0 +1,23 @@
+﻿@using Get_Help.Core.Models.Admin
+@model TopicsListViewModel
+
+@{
+    ViewData["Title"] = "Topics";
+}
+
+<a class="btn btn-primary my-4" asp-action="AddTopic" asp-route-id="@Model.Id">Add Topic</a>
+<div class="d-flex flex-column gap-2">
+    @foreach (var topic in Model.Topics)
+    {
+        <div class="row ">
+            <div class="d-block col-11 px-0 align-self-center">
+                <div class="d-flex border border-primary h-2 justify-content-center">
+                    <p class="align-self-center">@topic.Name</p>
+                </div>
+            </div>
+            <div class="d-flex flex-column gap-1 col-1">
+                <a class="btn btn-danger align-self-center" asp-action="DeleteTopic" asp-route-id="@topic.Id" asp-route-service="@Model.Id">Delete</a>
+            </div>
+        </div>
+    }
+</div>

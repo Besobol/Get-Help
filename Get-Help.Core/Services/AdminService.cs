@@ -158,6 +158,35 @@ namespace Get_Help.Core.Services
             return model;
         }
 
+        public async Task<TopicsListViewModel> GetTopics(int serviceId)
+        {
+            var model = new TopicsListViewModel();
+            model.Id = serviceId;
+
+            model.Topics = await repository.AllReadOnly<Topic>()
+                .Where(t => t.ServiceId == serviceId)
+                .Select(t => new TopicListViewModel()
+                {
+                    Id = t.Id,
+                    Name = t.Name
+                })
+                .ToListAsync();
+
+            return model;
+        }
+
+        public async Task AddTopic(AddTopicModel input)
+        {
+            var model = new Topic() 
+            { 
+                ServiceId = input.ServiceId,
+                Name = input.Name
+            };
+
+            await repository.AddAsync(model);
+            await repository.SaveChangesAsync();
+        }
+
         public async Task DeleteServiceById(int Id)
         {
             await repository.DeleteAsync<Service>(Id);

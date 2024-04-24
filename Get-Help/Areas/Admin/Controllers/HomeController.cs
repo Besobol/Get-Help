@@ -103,10 +103,30 @@ namespace Get_Help.Areas.Admin.Controllers
             return RedirectToAction("Services");
         }
 
-        [HttpPost]
-        public IActionResult AddTopic()
+        public async Task<IActionResult> Topics(int id)
         {
-            return RedirectToAction("Index");
+            var model = await adminService.GetTopics(id);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddTopic(int id)
+        {
+            var model = new AddTopicModel()
+            {
+                ServiceId = id,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddTopic([FromForm]AddTopicModel model)
+        {
+            await adminService.AddTopic(model);
+
+            return RedirectToAction("Topics", new { id = model.ServiceId });
         }
 
         [HttpGet]

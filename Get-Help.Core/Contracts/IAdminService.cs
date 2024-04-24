@@ -16,6 +16,8 @@ namespace Get_Help.Core.Contracts
         Task AddNewService(AddServiceModel service);
         Task<EditServiceModel> GetServiceById(int id);
         Task EditService(EditServiceModel model);
+        Task<TopicsListViewModel> GetTopics(int serviceId);
+        Task AddTopic(AddTopicModel input);
         Task DeleteServiceById(int Id);
         Task Logout();
         Task<List<AgentListViewModel>> GerAgents();
