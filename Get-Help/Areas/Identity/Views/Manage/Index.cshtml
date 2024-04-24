@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Mange Account";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<section class="d-flex flex-column gap-5">
+    <a class="btn btn-info" asp-action="ChangePassword">Change Password</a>
+    
+    <a class="btn btn-warning" asp-action="DeleteAccount">Delete Account</a>
+    
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

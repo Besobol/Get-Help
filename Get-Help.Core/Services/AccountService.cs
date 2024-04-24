@@ -1,4 +1,5 @@
 ﻿using Get_Help.Core.Contracts;
+using Get_Help.Core.Models.Agent;
 using Get_Help.Core.Models.Client;
 using Get_Help.Infrastructure.Data.Common;
 using Get_Help.Infrastructure.Data.Models;
@@ -44,6 +45,28 @@ namespace Get_Help.Core.Services
             var result = await clientUserManager.CreateAsync(user, input.Password);
             
             return result;
+        }
+
+        public async Task<IdentityResult> ChangePassword(int userId ,string currPass, string newPass)
+        {
+            var user = await clientUserManager.FindByIdAsync(userId.ToString());
+            return await clientUserManager.ChangePasswordAsync(user, currPass, newPass);
+        }
+
+        public async Task Logout()
+        {
+            await clientSignInManager.SignOutAsync();
+        }
+
+        public async Task<IdentityResult> DeleteAccount(int userId)
+        {
+            var user = await clientUserManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "", Description = $"Unable to load user with ID '{userId}'" });
+            }
+
+            return await clientUserManager.DeleteAsync(user);
         }
 
         private T CreateUser<T>() where T : ApplicationUser

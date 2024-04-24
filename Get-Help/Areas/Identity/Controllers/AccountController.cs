@@ -1,12 +1,14 @@
 ﻿using Get_Help.Attributes.ActionFilterAttributes;
 using Get_Help.Core.Contracts;
 using Get_Help.Core.Models.Client;
+using Get_Help.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Get_Help.Areas.Identity.Controllers
 {
     [Area("Identity")]
+    [AnonymousOnly]
     public class AccountController : Controller
     {
         private IAccountService accountService;
@@ -17,7 +19,6 @@ namespace Get_Help.Areas.Identity.Controllers
         }
 
         [HttpGet]
-        [AnonymousOnly]
         public IActionResult Login()
         {
             var model = new LoginClientModel();
@@ -26,7 +27,6 @@ namespace Get_Help.Areas.Identity.Controllers
         }
 
         [HttpPost]
-        [AnonymousOnly]
         public async Task<IActionResult> Login(LoginClientModel model)
         {
 
@@ -41,7 +41,6 @@ namespace Get_Help.Areas.Identity.Controllers
         }
 
         [HttpGet]
-        [AnonymousOnly]
         public IActionResult Register()
         {
             var model = new RegisterClientModel();
@@ -50,7 +49,6 @@ namespace Get_Help.Areas.Identity.Controllers
         }
 
         [HttpPost]
-        [AnonymousOnly]
         public async Task<IActionResult> Register(RegisterClientModel model)
         {
             if (!ModelState.IsValid)

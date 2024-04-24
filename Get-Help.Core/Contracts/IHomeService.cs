@@ -1,4 +1,5 @@
 ﻿using Get_Help.Core.Models.Home;
+using System.Security.Claims;
 
 namespace Get_Help.Core.Contracts
 {
@@ -11,5 +12,6 @@ namespace Get_Help.Core.Contracts
         Task<TicketModel> GetTicketById(int ticketId);
         Task SendMessage(TicketMessageFormModel message, int userId);
         Task CloseTicket(int ticketId, int userId);
+        bool IsLoggedIn(ClaimsPrincipal user);
     }
 }

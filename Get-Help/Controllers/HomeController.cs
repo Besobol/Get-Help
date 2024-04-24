@@ -26,7 +26,9 @@ namespace Get_Help.Controllers
         {
             List<TopicModel> model;
 
-            if (User != null)
+            var isLogedIn = service.IsLoggedIn(User);
+
+            if (isLogedIn == true)
             {
                 var userId = GetUserId();
                 model = await service.GetAllTopicsByServiceIdAsync(id, true, userId);

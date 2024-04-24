@@ -33,7 +33,7 @@ namespace Get_Help.Infrastructure.Data.Models
         public Agent? Agent { get; set; }
 
         [Comment("Client Identifier")]
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
         [ForeignKey(nameof(ClientId))]
         public Client? Client { get; set; }
 

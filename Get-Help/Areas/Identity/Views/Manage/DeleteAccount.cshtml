@@ -1,0 +1,24 @@
+﻿@using Get_Help.Core.Models.Agent
+@model ChangePasswordModel
+
+@{
+    ViewData["Title"] = "Delete Account";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+
+    <h2>Are you sure you want to delete your account?</h2>
+    <h2>This action is irreversible!</h2>
+
+    <section class="d-flex gap-5">
+
+        <a asp-action="Index" class="btn btn-success" type="submit">Go Back</a>
+
+        <form asp-action="DeleteAccount">
+            <input name="confirm" type="checkbox" checked="checked" value="true"/>
+            <button class="btn btn-danger" type="submit">Delete Account</button>
+        </form>
+    </section>
+</div>

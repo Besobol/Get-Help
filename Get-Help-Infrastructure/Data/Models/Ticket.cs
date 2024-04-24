@@ -18,9 +18,9 @@ namespace Get_Help.Infrastructure.Data.Models
 
         [Required]
         [Comment("Client Identifier")]
-        public required int ClientId { get; set; }
+        public required int? ClientId { get; set; }
         [ForeignKey(nameof(ClientId))]
-        public Client Client { get; set; } = null!;
+        public Client? Client { get; set; } = null!;
 
         [Required]
         [Comment("Time of opening the Ticket")]

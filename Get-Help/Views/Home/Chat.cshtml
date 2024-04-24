@@ -6,18 +6,18 @@
 <div class="d-flex flex-column">
     @foreach(var message in Model.Messages)
     {
-        if(message.Sender == MessageSender.client)
+        if(message.ClientName != null)
         {
             <div class="d-flex">
-                <p class="message-sender">@message.SenderName:</p>
+                <p class="message-sender">@message.ClientName:</p>
                 <p class="message-text mx-2 flex-shrink-1 text-break">@message.Content</p>
                 <p class="align-self-end ml-auto flex-shrink-0">@message.SentTime</p>
             </div>
         }
-        else if(message.Sender == MessageSender.agent)
+        else if(message.AgentName != null)
         {
             <div class="d-flex">
-                <p class="message-sender">@message.SenderName:</p>
+                <p class="message-sender">@message.AgentName:</p>
                 <p class="message-text ml-2">@message.Content</p>
                 <p class="align-self-end ml-auto">@message.SentTime</p>
             </div>

@@ -4,6 +4,7 @@ using Get_Help.Infrastructure.Data.Common;
 using Get_Help.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Get_Help.Core.Services
 {
@@ -106,9 +107,10 @@ namespace Get_Help.Core.Services
                     Messages = t.Messages.Select(m => new MessageModel()
                     {
                         Content = m.Content,
-                        SenderName = m.Agent == null ? m.Client.UserName : m.Agent.Name,
-                        SentTime = TimeOnly.FromDateTime(m.SentTime),
-                        Sender = m.Agent == null ? Enums.MessageSender.client : Enums.MessageSender.agent
+                        SentTime = m.SentTime,
+                        AgentName = m.Agent != null ? m.Agent.Name : null,
+                        ClientName = m.Client != null ? m.Client.UserName : null
+
                     }).ToList()
                 })
                 .FirstOrDefaultAsync();
@@ -144,6 +146,11 @@ namespace Get_Help.Core.Services
             ticket.TimeClosed = DateTime.Now;
 
             await repository.SaveChangesAsync();
+        }
+    
+        public bool IsLoggedIn(ClaimsPrincipal user)
+        {
+            return signInManager.IsSignedIn(user);
         }
     }
 }
