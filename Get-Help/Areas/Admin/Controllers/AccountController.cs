@@ -37,7 +37,7 @@ namespace Get_Help.Areas.Admin.Controllers
 
             if (!loginResult.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login");
             }
 
             return RedirectToAction("Index", "Home", new { area = "Admin"});

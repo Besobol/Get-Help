@@ -9,17 +9,17 @@ namespace Get_Help.Core.Contracts
     {
         Task<SignInResult> LoginAdmin(LoginAdminModel input);
         Task<IdentityResult> RegisterAgent(RegisterAgentModel input);
-        Task<AgentViewModel> GetAgentById(int id);
         Task<IdentityResult> DeleteAgentById(int id);
         Task<IdentityResult> ChangeAgentPasswordById(int id, string newPass);
-        Task<List<ServiceModel>> GetAllServices();
-        Task AddNewService(AddServiceModel service);
+        Task<AgentViewModel> GetAgentById(int id);
         Task<EditServiceModel> GetServiceById(int id);
-        Task EditService(EditServiceModel model);
         Task<TopicsListViewModel> GetTopics(int serviceId);
+        Task<List<ServiceModel>> GetAllServices();
+        Task<List<AgentListViewModel>> GerAgents();
+        Task AddNewService(AddServiceModel service);
+        Task EditService(EditServiceModel model);
         Task AddTopic(AddTopicModel input);
         Task DeleteServiceById(int Id);
         Task Logout();
-        Task<List<AgentListViewModel>> GerAgents();
     }
 }

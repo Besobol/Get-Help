@@ -111,7 +111,7 @@ namespace Get_Help.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddTopic(int id)
+        public IActionResult AddTopic(int id)
         {
             var model = new AddTopicModel()
             {

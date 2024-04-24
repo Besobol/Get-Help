@@ -50,41 +50,17 @@ namespace Get_Help.Core.Services
             return await agentUserManager.CreateAsync(user, input.Password);
         }
 
-        public async Task<List<AgentListViewModel>> GerAgents()
-        {
-            var result = await repository.AllReadOnly<Agent>()
-                .Select(a => new AgentListViewModel()
-                {
-                    Id = a.Id,
-                    Name = a.Name
-                })
-                .ToListAsync();
-
-            return result;
-        }
-
-        public async Task<AgentViewModel> GetAgentById(int id)
-        {
-            var result = await repository.AllReadOnly<Agent>()
-                .Where(a => a.Id == id)
-                .Select(a => new AgentViewModel()
-                {
-                    Id = a.Id,
-                    Name = a.Name,
-                    Email = a.Email
-                })
-                .FirstOrDefaultAsync();
-
-            return result;
-        }
-
         public async Task<IdentityResult> DeleteAgentById(int id)
         {
-            Agent agent = await agentUserManager.FindByIdAsync(id.ToString());
+            var user = await agentUserManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "", Description = $"Unable to load user with ID '{id}'" });
+            }
 
-            return await agentUserManager.DeleteAsync(agent);
+            return await agentUserManager.DeleteAsync(user);
         }
-
+        
         public async Task<IdentityResult> ChangeAgentPasswordById(int id, string newPass)
         {
             Agent agent = await agentUserManager.FindByIdAsync(id.ToString());
@@ -103,6 +79,65 @@ namespace Get_Help.Core.Services
             agent.PasswordHash = hasher.HashPassword(agent, newPass);
             
             return await agentUserManager.UpdateSecurityStampAsync(agent);
+        }
+        
+        public async Task<AgentViewModel> GetAgentById(int id)
+        {
+            var result = await repository.AllReadOnly<Agent>()
+                .Where(a => a.Id == id)
+                .Select(a => new AgentViewModel()
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    Email = a.Email
+                })
+                .FirstOrDefaultAsync();
+
+            return result;
+        }
+        
+        public async Task<EditServiceModel> GetServiceById(int id)
+        {
+            var model = await repository.AllReadOnly<Service>()
+                .Where(s => s.Id == id)
+                .Select(s => new EditServiceModel()
+                {
+                    Name = s.Name,
+                    ImgUrl = s.ImgUrl,
+                })
+                .FirstOrDefaultAsync();
+
+            return model;
+        }
+        
+        public async Task<TopicsListViewModel> GetTopics(int serviceId)
+        {
+            var model = new TopicsListViewModel();
+            model.Id = serviceId;
+
+            model.Topics = await repository.AllReadOnly<Topic>()
+                .Where(t => t.ServiceId == serviceId)
+                .Select(t => new TopicListViewModel()
+                {
+                    Id = t.Id,
+                    Name = t.Name
+                })
+                .ToListAsync();
+
+            return model;
+        }
+
+        public async Task<List<AgentListViewModel>> GerAgents()
+        {
+            var result = await repository.AllReadOnly<Agent>()
+                .Select(a => new AgentListViewModel()
+                {
+                    Id = a.Id,
+                    Name = a.Name
+                })
+                .ToListAsync();
+
+            return result;
         }
 
         public async Task<List<ServiceModel>> GetAllServices()
@@ -142,37 +177,6 @@ namespace Get_Help.Core.Services
             service.ImgUrl = model.ImgUrl;
 
             await repository.SaveChangesAsync();
-        }
-
-        public async Task<EditServiceModel> GetServiceById(int id)
-        {
-            var model = await repository.AllReadOnly<Service>()
-                .Where(s => s.Id == id)
-                .Select(s => new EditServiceModel()
-                {
-                    Name = s.Name,
-                    ImgUrl = s.ImgUrl,
-                })
-                .FirstOrDefaultAsync();
-
-            return model;
-        }
-
-        public async Task<TopicsListViewModel> GetTopics(int serviceId)
-        {
-            var model = new TopicsListViewModel();
-            model.Id = serviceId;
-
-            model.Topics = await repository.AllReadOnly<Topic>()
-                .Where(t => t.ServiceId == serviceId)
-                .Select(t => new TopicListViewModel()
-                {
-                    Id = t.Id,
-                    Name = t.Name
-                })
-                .ToListAsync();
-
-            return model;
         }
 
         public async Task AddTopic(AddTopicModel input)
