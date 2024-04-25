@@ -76,6 +76,7 @@ namespace Get_Help.Core.Services
                 ClientId = userId,
                 TopicId = topicId,
                 TimeOpened = DateTime.Now,
+                Title = ""
             };
 
             await repository.AddAsync(model);

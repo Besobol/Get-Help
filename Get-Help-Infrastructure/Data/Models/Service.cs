@@ -21,11 +21,6 @@ namespace Get_Help.Infrastructure.Data.Models
         [Comment("Service title Image Url")]
         public required string ImgUrl { get; set; }
 
-        [Comment("Delete Type Identifier")]
-        public int? DeleteTypeId { get; set; }
-        [ForeignKey(nameof(DeleteTypeId))]
-        public DeleteType? DeleteType { get; set; }
-
         public List<Topic> Topics { get; set; } = new();
     }
 }

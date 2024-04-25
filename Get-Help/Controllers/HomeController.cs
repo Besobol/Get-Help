@@ -26,9 +26,9 @@ namespace Get_Help.Controllers
         {
             List<TopicModel> model;
 
-            var isLogedIn = service.IsLoggedIn(User);
+            var isLoggedIn = service.IsLoggedIn(User);
 
-            if (isLogedIn == true)
+            if (isLoggedIn == true)
             {
                 var userId = GetUserId();
                 model = await service.GetAllTopicsByServiceIdAsync(id, true, userId);
@@ -40,6 +40,7 @@ namespace Get_Help.Controllers
 
             return View(model);
         }
+
 
         public async Task<IActionResult> OpenTicket(int id)
         {

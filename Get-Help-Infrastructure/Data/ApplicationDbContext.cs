@@ -23,12 +23,12 @@ namespace Get_Help.Infrastructure.Data
             base.OnModelCreating(builder);
         }
 
-        public DbSet<DeleteType> DeleteTypes { get; set; }
         public DbSet<Agent> Agents { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
     }
 }

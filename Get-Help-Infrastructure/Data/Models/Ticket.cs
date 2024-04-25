@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Get_Help.Infrastructure.Constants.DataConstants;
 
 namespace Get_Help.Infrastructure.Data.Models
 {
@@ -10,6 +11,10 @@ namespace Get_Help.Infrastructure.Data.Models
         [Key]
         [Comment("Ticket Identifier")]
         public int Id { get; set; }
+
+        [Required]
+        [StringLength(TicketTitleMaxLength)]
+        public required string Title { get; set; }
 
         [Comment("Agent Identifier")]
         public int? AgentId { get; set; }
@@ -33,11 +38,6 @@ namespace Get_Help.Infrastructure.Data.Models
         [Comment("Topic Identifier")]
         public required int TopicId { get; set; }
         public Topic Topic { get; set; } = null!;
-
-        [Comment("Delete Type Identifier")]
-        public int? DeleteTypeId { get; set; }
-        [ForeignKey(nameof(DeleteTypeId))]
-        public DeleteType? DeleteType { get; set; }
 
         public List<Message> Messages { get; set; } = new();
     }

@@ -11,5 +11,7 @@
         public const int ServiceNameMaxLength = 50;
 
         public const int TopicNameMaxLength = 150;
+
+        public const int TicketTitleMaxLength = 100;
     }
 }
