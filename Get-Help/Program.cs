@@ -27,18 +27,21 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-#pragma warning disable ASP0014
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+        name: "area",
+        pattern: "{area:exists}/{controller=Home}/{action=Services}/{id?}"
     );
 
-    endpoints.MapDefaultControllerRoute();
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Services}/{id?}"
+    );
 });
-#pragma warning restore ASP0014
 
 await app.CreateAdminRoleAsync();
+await app.CreateClientRoleAsync();
+await app.CreateAgentRoleAsync();
 
 await app.RunAsync();

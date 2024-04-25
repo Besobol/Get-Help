@@ -12,7 +12,7 @@
 
     @foreach (var topic in Model)
     {
-        <a asp-area="Identity" asp-controller="Account" asp-action="Login" class="d-flex border border-primary h-2 justify-content-center">
+        <a asp-action="OpenTicket" asp-route-id="@topic.Id" class="d-flex border border-primary h-2 justify-content-center">
             <p class="align-self-center">@topic.Name</p>
         </a>
     }

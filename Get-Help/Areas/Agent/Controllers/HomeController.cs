@@ -46,6 +46,11 @@ namespace Get_Help.Areas.Agent.Controllers
 
             var ticketId = await agentService.ClaimByTopicId(id, userId);
 
+            if (ticketId == 0)
+            {
+                ModelState.AddModelError("", "Failed to find ticket");
+            }
+
             return RedirectToAction("Chat", new { id = ticketId });
         }
 

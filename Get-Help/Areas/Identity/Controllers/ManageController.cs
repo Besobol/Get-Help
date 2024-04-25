@@ -86,7 +86,7 @@ namespace Get_Help.Areas.Identity.Controllers
         public async Task<IActionResult> Logout()
         {
             await accountService.Logout();
-            return RedirectToAction("Index", "Home", new { area = "" });
+            return RedirectToAction("Index", "Services", new { area = "" });
         }
 
         private int GetUserId()

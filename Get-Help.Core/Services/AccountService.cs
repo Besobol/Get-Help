@@ -42,15 +42,23 @@ namespace Get_Help.Core.Services
 
             user.Id = 0;
 
+            await clientUserManager.AddToRoleAsync(user, "Client");
+
             var result = await clientUserManager.CreateAsync(user, input.Password);
-            
+
             return result;
         }
 
-        public async Task<IdentityResult> ChangePassword(int userId ,string currPass, string newPass)
+        public async Task<IdentityResult> ChangePassword(int userId, string currPass, string newPass)
         {
             var user = await clientUserManager.FindByIdAsync(userId.ToString());
-            return await clientUserManager.ChangePasswordAsync(user, currPass, newPass);
+
+            if (user != null)
+            {
+                return await clientUserManager.ChangePasswordAsync(user, currPass, newPass);
+            }
+
+            return IdentityResult.Failed(new IdentityError() { Code = "", Description = $"Failed to find user with Id '{userId}'"});
         }
 
         public async Task Logout()

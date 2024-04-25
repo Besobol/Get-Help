@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Get_Help.Areas.Identity.Controllers
 {
     [Area("Identity")]
-    [AnonymousOnly]
     public class AccountController : Controller
     {
         private IAccountService accountService;

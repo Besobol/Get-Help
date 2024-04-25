@@ -37,7 +37,13 @@ namespace Get_Help.Core.Services
         public async Task<IdentityResult> ChangePassword(int userId, string currPass, string newPass)
         {
             var user = await userManager.FindByIdAsync(userId.ToString());
-            return await userManager.ChangePasswordAsync(user, currPass, newPass);
+
+            if (user != null)
+            {
+                return await userManager.ChangePasswordAsync(user, currPass, newPass);
+            }
+
+            return IdentityResult.Failed(new IdentityError() { Code = "", Description = $"Failed to find user with Id '{userId}'" });
         }
 
         public async Task<List<ServiceModel>> GetServices()
@@ -58,14 +64,14 @@ namespace Get_Help.Core.Services
         public async Task<List<AgentTopicModel>> GetUnclaimedTopics(int serviceId, int agentId)
         {
             var model = await repository.AllReadOnly<Topic>()
-                .Where(t => 
-                    t.ServiceId == serviceId && 
+                .Where(t =>
+                    t.ServiceId == serviceId &&
                     t.Tickets.Where(ti => ti.TimeClosed != null).Count() > 0 &&
                     t.Tickets.Any(ti => ti.AgentId != null) == false)
                 .Select(t => new AgentTopicModel()
                 {
-                    Id=t.Id,
-                    Name=t.Name,
+                    Id = t.Id,
+                    Name = t.Name,
                     UnclaimedTickets = t.Tickets.Where(ti => ti.TimeClosed != null).Count()
                 })
                 .ToListAsync();
@@ -81,14 +87,17 @@ namespace Get_Help.Core.Services
                     t.AgentId == null)
                 .FirstOrDefaultAsync();
 
-            model.AgentId = userId;
+            if (model != null)
+            {
+                model.AgentId = userId;
+                await repository.SaveChangesAsync();
+                return model.Id;
+            }
 
-            await repository.SaveChangesAsync();
-
-            return model.Id;
+            return 0;
         }
 
-        public async Task<TicketModel> GetTicketById(int ticketId)
+        public async Task<TicketModel?> GetTicketById(int ticketId)
         {
             var result = await repository
                 .AllReadOnly<Ticket>()
@@ -97,6 +106,7 @@ namespace Get_Help.Core.Services
                 {
                     Id = t.Id,
                     Topic = t.Topic.Name,
+                    Title = t.Title,
                     Messages = t.Messages.Select(m => new MessageModel()
                     {
                         Content = m.Content,

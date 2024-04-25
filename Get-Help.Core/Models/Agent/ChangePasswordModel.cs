@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Get_Help.Core.Constants.FieldConstants;
+using static Get_Help.Core.Constants.ErrorMessages;
 
 namespace Get_Help.Core.Models.Agent
 {
@@ -9,7 +10,7 @@ namespace Get_Help.Core.Models.Agent
         [DataType(DataType.Password)]
         [StringLength(
             100,
-            ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+            ErrorMessage = stringLengthErrorMessage,
             MinimumLength = passwordMinLength)]
         [Display(Name = "Current Password")]
         public string CurrentPassword { get; set; } = string.Empty;
@@ -18,7 +19,7 @@ namespace Get_Help.Core.Models.Agent
         [DataType(DataType.Password)]
         [StringLength(
             100,
-            ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+            ErrorMessage = stringLengthErrorMessage,
             MinimumLength = passwordMinLength)]
         [Display(Name = "New Password")]
         public string NewPassword { get; set; } = string.Empty;
@@ -27,7 +28,7 @@ namespace Get_Help.Core.Models.Agent
         [Display(Name = "Confirm password")]
         [Compare(
             nameof(NewPassword),
-            ErrorMessage = "The password and confirmation password do not match.")]
+            ErrorMessage = stringLengthErrorMessage)]
         public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

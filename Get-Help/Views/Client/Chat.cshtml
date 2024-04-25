@@ -1,0 +1,41 @@
+﻿@using Get_Help.Core.Enums
+@model TicketModel
+
+<div class="d-flex justify-content-between">
+    <h2 class="align-self-center text">@Model.Title</h2>
+    <a class="btn btn-info align-self-center" asp-action="CloseTicket" asp-route-id="@Model.Id">Close Ticket</a>
+</div>
+
+<div class="d-flex flex-column border-1 border-black border chat-box">
+    @foreach (var message in Model.Messages)
+    {
+        if (message.ClientName != null)
+        {
+            <div class="d-flex">
+                <p class="message-sender">@message.ClientName:</p>
+                <p class="message-text mx-2 flex-shrink-1 text-break">@message.Content</p>
+                <p class="align-self-end ml-auto flex-shrink-0">@TimeOnly.FromDateTime(message.SentTime)</p>
+            </div>
+        }
+        else if (message.AgentName != null)
+        {
+            <div class="d-flex">
+                <p class="message-sender">@message.AgentName:</p>
+                <p class="message-text mx-2 flex-shrink-1 text-break">@message.Content</p>
+                <p class="align-self-end ml-auto flex-shrink-0">@TimeOnly.FromDateTime(message.SentTime)</p>
+            </div>
+        }
+    }
+</div>
+
+<form asp-action="SendTicketMessage" method="post">
+    <div class="form-floating mb-3">
+        <input hidden name="TicketId" class="w-100" value="@Model.Id" />
+    </div>
+    <div class="form-floating mb-3">
+        <textarea name="MessageContent" class="w-100"></textarea>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </div>
+</form>

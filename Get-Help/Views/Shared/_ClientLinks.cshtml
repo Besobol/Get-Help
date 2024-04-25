@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Get_Help.Infrastructure.Data.Models
+@inject SignInManager<Client> ClientSignInManager
+@inject UserManager<Client> ClientUserManager
+
+@if (ClientSignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MyTickets">My Tickets</a>
+    </li>
+}

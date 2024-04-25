@@ -1,0 +1,27 @@
+﻿@model OpenTicketFormModel
+
+@{
+    ViewData["Title"] = "Open Ticket";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form id="account" method="post">
+                <h2>Create a new ticket.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="@Model.Title" class="form-control" aria-required="true" placeholder="Title" />
+                    <label asp-for="@Model.Title" class="form-label">Ticket title</label>
+                    <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                </div>
+                <div>
+                    <p>
+                        <button type="submit" class="btn btn-primary" asp-action="OpenTicket">Open Ticket</button>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

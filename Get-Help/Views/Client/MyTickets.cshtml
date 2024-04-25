@@ -1,0 +1,36 @@
+﻿@using Get_Help.Core.Helper
+@using Get_Help.Core.Models.Home
+@model PagedList<TicketViewModel>
+
+<section class="d-flex flex-column gap-5">
+    <div class="d-flex flex-column gap-2">
+        @foreach (var ticket in Model)
+        {
+            <a asp-action="Chat" asp-route-id="@ticket.Id" class="d-flex border border-primary h-2 justify-content-center">
+                <div class="d-flex justify-content-between w-100 px-2">
+                    <p class="align-self-center">@ticket.Title</p>
+                    <p class="align-self-center">@ticket.Topic</p>
+                </div>
+            </a>
+        }
+    </div>
+
+    <div class="d-flex justify-content-center gap-4">
+        @if (Model.HasPrevious)
+        {
+            <a class="btn btn-primary" asp-action="MyTickets" asp-route-page="@(Model.CurrentPage-1)">Previous</a>
+        }
+        else
+        {
+            <a class="btn btn-primary disabled">Previous</a>
+        }
+        @if (Model.HasNext)
+        {
+            <a class="btn btn-primary" asp-action="MyTickets" asp-route-page="@(Model.CurrentPage+1)">Next</a>
+        }
+        else
+        {
+            <a class="btn btn-primary disabled">Next</a>
+        }
+    </div>
+</section>

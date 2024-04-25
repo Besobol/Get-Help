@@ -6,16 +6,15 @@ using System.Runtime.CompilerServices;
 
 namespace Get_Help.Attributes.ActionFilterAttributes
 {
-    public class AllowAgents : ActionFilterAttribute
+    public class AllowClient : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
 
-            if (!context.HttpContext.User.IsInRole("Agent"))
+            if (!context.HttpContext.User.IsInRole("Client"))
             {
-                // return 404 to unauthorized for safety
-                context.Result = new StatusCodeResult(StatusCodes.Status404NotFound);
+                context.Result = new RedirectToActionResult("Register", "Account", new { area = "Identity" });
             }
         }
     }

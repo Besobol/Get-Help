@@ -43,7 +43,7 @@ namespace Get_Help.Areas.Agent.Controllers
             return RedirectToAction("Index", "Home", new { area = "Agent" });
         }
 
-        public async Task<IActionResult> ChangePassword()
+        public IActionResult ChangePassword()
         {
             var model = new ChangePasswordModel();
 

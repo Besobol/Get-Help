@@ -40,9 +40,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<SignInManager<Client>>();
 
             services.AddIdentityCore<Agent>()
+                .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityCore<Client>()
+                .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             return services;
@@ -54,6 +56,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IAgentService, AgentService>();
+            services.AddScoped<IClientService, ClientService>();
 
             return services;
         }
