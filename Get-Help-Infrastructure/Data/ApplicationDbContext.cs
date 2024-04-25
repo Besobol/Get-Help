@@ -19,11 +19,6 @@ namespace Get_Help.Infrastructure.Data
             builder.ApplyConfiguration(new ServiceConfiguration());
             builder.ApplyConfiguration(new TicketConfiguration());
             builder.ApplyConfiguration(new TopicConfiguration());
-            builder.ApplyConfiguration(new ForumPostConfiguration());
-            builder.ApplyConfiguration(new ForumTopicConfiguration());
-            builder.ApplyConfiguration(new ForumUserConfiguration());
-            builder.ApplyConfiguration(new ForumPostReplyConfiguration());
-            builder.ApplyConfiguration(new ForumPostRatingConfiguration());
 
             base.OnModelCreating(builder);
         }
@@ -34,11 +29,6 @@ namespace Get_Help.Infrastructure.Data
         public DbSet<Service> Services { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<ForumUser> ForumUsers { get; set; }
-        public DbSet<ForumTopic> ForumTopics { get; set; }
-        public DbSet<ForumPost> ForumPosts { get; set; }
-        public DbSet<ForumPostReply> ForumPostReplies { get; set; }
-        public DbSet<ForumPostRating> ForumPostRatings { get; set; }
 
     }
 }
