@@ -13,12 +13,23 @@ namespace Get_Help.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new AgentRoleConfiguration());
+            builder.ApplyConfiguration(new ClientRoleConfiguration());
             builder.ApplyConfiguration(new AgentConfiguration());
             builder.ApplyConfiguration(new ClientConfiguration());
-            builder.ApplyConfiguration(new MessageConfiguration());
             builder.ApplyConfiguration(new ServiceConfiguration());
-            builder.ApplyConfiguration(new TicketConfiguration());
             builder.ApplyConfiguration(new TopicConfiguration());
+            builder.ApplyConfiguration(new TicketConfiguration());
+            builder.ApplyConfiguration(new MessageConfiguration());
+
+            builder.ApplyConfiguration(new SeedAgentRoleConfiguration());
+            builder.ApplyConfiguration(new SeedClientRoleConfiguration());
+            builder.ApplyConfiguration(new SeedAgentConfiguration());
+            builder.ApplyConfiguration(new SeedClientConfiguration());
+            builder.ApplyConfiguration(new SeedServiceConfiguration());
+            builder.ApplyConfiguration(new SeedTopicConfiguration());
+            builder.ApplyConfiguration(new SeedTicketConfiguration());
+            builder.ApplyConfiguration(new SeedMessageConfiguration());
 
             base.OnModelCreating(builder);
         }

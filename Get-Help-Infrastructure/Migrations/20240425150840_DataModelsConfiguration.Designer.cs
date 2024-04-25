@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Get_Help.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240425134409_AddedRoles")]
-    partial class AddedRoles
+    [Migration("20240425150840_DataModelsConfiguration")]
+    partial class DataModelsConfiguration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

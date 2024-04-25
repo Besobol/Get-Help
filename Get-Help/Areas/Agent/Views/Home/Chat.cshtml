@@ -4,7 +4,7 @@
 
 <a class="btn btn-info" asp-action="CloseTicket" asp-route-id="@Model.Id">Close Ticket</a>
 
-<div class="d-flex flex-column">
+<div class="d-flex flex-column border-1 border-black border chat-box">
     @foreach(var message in Model.Messages)
     {
         if(message.ClientName != null)

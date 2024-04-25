@@ -67,4 +67,5 @@ textarea {
 
 .chat-box{
     height: 60vh;
+    overflow: scroll;
 }

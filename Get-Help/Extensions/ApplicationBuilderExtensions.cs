@@ -53,38 +53,5 @@ namespace Get_Help.Extensions
             }
 
         }
-        public static async Task CreateClientRoleAsync(this IApplicationBuilder app)
-        {
-            string userRole = "Client";
-
-            using var scope = app.ApplicationServices.CreateScope();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ClientRole>>();
-
-            if (roleManager != null)
-            {
-                if (await roleManager.RoleExistsAsync(userRole) == false)
-                {
-                    var role = new ClientRole(userRole);
-                    await roleManager.CreateAsync(role);
-                }
-            }
-        }
-        public static async Task CreateAgentRoleAsync(this IApplicationBuilder app)
-        {
-            string userRole = "Agent";
-
-            using var scope = app.ApplicationServices.CreateScope();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AgentRole>>();
-
-            if (roleManager != null)
-            {
-
-                if (await roleManager.RoleExistsAsync(userRole) == false)
-                {
-                    var role = new AgentRole(userRole);
-                    await roleManager.CreateAsync(role);
-                }
-            }
-        }
     }
 }

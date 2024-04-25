@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Get_Help.Infrastructure.Data.Models.Configuration
 {
-    public class ServiceConfiguration : IEntityTypeConfiguration<Service>
+    public class AgentRoleConfiguration : IEntityTypeConfiguration<AgentRole>
     {
-        public void Configure(EntityTypeBuilder<Service> builder)
+        public void Configure(EntityTypeBuilder<AgentRole> builder)
         {
+
         }
     }
 }

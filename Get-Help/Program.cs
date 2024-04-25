@@ -41,7 +41,5 @@ app.UseEndpoints(endpoints =>
 });
 
 await app.CreateAdminRoleAsync();
-await app.CreateClientRoleAsync();
-await app.CreateAgentRoleAsync();
 
 await app.RunAsync();

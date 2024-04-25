@@ -4,6 +4,7 @@ using Get_Help.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Get_Help.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240425150443_AddRoles")]
+    partial class AddRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,48 +184,6 @@ namespace Get_Help.Infrastructure.Migrations
                         {
                             t.HasComment("Ticket Message");
                         });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClientId = 3,
-                            Content = "I need advice about my question",
-                            SentTime = new DateTime(2024, 4, 25, 18, 33, 58, 227, DateTimeKind.Local).AddTicks(6729),
-                            TicketId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AgentId = 2,
-                            Content = "Answer",
-                            SentTime = new DateTime(2024, 4, 25, 18, 33, 58, 227, DateTimeKind.Local).AddTicks(6730),
-                            TicketId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClientId = 3,
-                            Content = "Question",
-                            SentTime = new DateTime(2024, 4, 25, 18, 33, 58, 227, DateTimeKind.Local).AddTicks(6732),
-                            TicketId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AgentId = 2,
-                            Content = "Confusion?",
-                            SentTime = new DateTime(2024, 4, 25, 18, 33, 58, 227, DateTimeKind.Local).AddTicks(6734),
-                            TicketId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ClientId = 3,
-                            Content = "Paragraph of explanation: The morning sun gently kissed the dewy grass as birds chirped melodies of a new day. Amidst the tranquility, whispers of adventure beckoned, enticing souls to explore the unknown. With each step, the world unfolded, revealing secrets waiting to be discovered.\r\nThe world hummed with the rhythm of life, where each heartbeat echoed a tale untold. Beneath the azure sky, dreams danced like leaves in the wind, weaving stories of hope and resilience. In the symphony of existence, every moment held the promise of infinite possibilities, waiting to be embraced.",
-                            SentTime = new DateTime(2024, 4, 25, 18, 33, 58, 227, DateTimeKind.Local).AddTicks(6735),
-                            TicketId = 1
-                        });
                 });
 
             modelBuilder.Entity("Get_Help.Infrastructure.Data.Models.Service", b =>
@@ -250,32 +211,6 @@ namespace Get_Help.Infrastructure.Migrations
                     b.ToTable("Services", t =>
                         {
                             t.HasComment("Service");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ImgUrl = "https://nepirockcastle.com/wp-content/uploads/2019/03/Technopolis-bg-logo.png",
-                            Name = "Technopolis"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ImgUrl = "https://th.bing.com/th/id/OIP.kxBLq5pbWza-QlJHrOyz6QHaDt?rs=1&pid=ImgDetMain",
-                            Name = "Technomarket"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ImgUrl = "Images/ServiceImages/Amazon.jpg",
-                            Name = "Amazon"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ImgUrl = "Images/ServiceImages/eBay.png",
-                            Name = "eBay"
                         });
                 });
 
@@ -326,256 +261,6 @@ namespace Get_Help.Infrastructure.Migrations
                         {
                             t.HasComment("Ticket");
                         });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 20, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4192),
-                            Title = "What are good PC parts at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 1, 16, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4200),
-                            Title = "How to find a good fridge",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 5, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4201),
-                            Title = "Can i use this microwave as an oven",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4203),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4205),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4206),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4208),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4209),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4211),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4213),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4215),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4216),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4218),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4219),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 15,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4221),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 16,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4222),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 17,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4224),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 18,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4225),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 19,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4227),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 20,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4228),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 21,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4230),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 22,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4231),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 23,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4233),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 24,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4234),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 25,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4236),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 26,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4292),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 27,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4294),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 28,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4296),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 29,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4298),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 30,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4300),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        },
-                        new
-                        {
-                            Id = 31,
-                            ClientId = 3,
-                            TimeOpened = new DateTime(2024, 4, 10, 18, 33, 58, 110, DateTimeKind.Local).AddTicks(4301),
-                            Title = "What are good deals at the moment",
-                            TopicId = 4
-                        });
                 });
 
             modelBuilder.Entity("Get_Help.Infrastructure.Data.Models.Topic", b =>
@@ -604,32 +289,6 @@ namespace Get_Help.Infrastructure.Migrations
                     b.ToTable("Topics", t =>
                         {
                             t.HasComment("Service Topic");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "How to cancel my purchase?",
-                            ServiceId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Account problems",
-                            ServiceId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Payment plans",
-                            ServiceId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Technical advice",
-                            ServiceId = 1
                         });
                 });
 
@@ -781,25 +440,6 @@ namespace Get_Help.Infrastructure.Migrations
                         .HasComment("Agent Name");
 
                     b.HasDiscriminator().HasValue("Agent");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "090bd9a0-b898-4020-936a-ee23c6bb6a09",
-                            Email = "Smith@agent.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "SMITH@AGENT.COM",
-                            NormalizedUserName = "SMITH@AGENT.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKFVSsEJa9vA6nWTHbdGfTE1YlfvBh7WhByGcY31C6lC/YAUmorO4PAjSt+imytx2Q==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f8a039b4-97d4-48c6-8c3b-14fad8a3f142",
-                            TwoFactorEnabled = false,
-                            UserName = "Smith@agent.com",
-                            Name = "Agent Smith"
-                        });
                 });
 
             modelBuilder.Entity("Get_Help.Infrastructure.Data.Models.Client", b =>
@@ -807,42 +447,22 @@ namespace Get_Help.Infrastructure.Migrations
                     b.HasBaseType("Get_Help.Infrastructure.Data.Models.ApplicationUser");
 
                     b.HasDiscriminator().HasValue("Client");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "03e98d4c-e097-4934-8438-1f4270ac8a12",
-                            Email = "JDoe@user.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "JDOE@USER.COM",
-                            NormalizedUserName = "JDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGu0sSs6hC/LRn7+iUMRN8Gj8QCNL/oqJVqiL13dsoeR5v4EFLFAlO0DR+qBAgEKXQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "99187c04-e717-4f2e-b890-6bf5ffc59057",
-                            TwoFactorEnabled = false,
-                            UserName = "JDoe"
-                        });
                 });
 
             modelBuilder.Entity("Get_Help.Infrastructure.Data.Models.Message", b =>
                 {
                     b.HasOne("Get_Help.Infrastructure.Data.Models.Agent", "Agent")
                         .WithMany("Messages")
-                        .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("AgentId");
 
                     b.HasOne("Get_Help.Infrastructure.Data.Models.Client", "Client")
                         .WithMany("Messages")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("ClientId");
 
                     b.HasOne("Get_Help.Infrastructure.Data.Models.Ticket", "Ticket")
                         .WithMany("Messages")
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Agent");
@@ -856,19 +476,18 @@ namespace Get_Help.Infrastructure.Migrations
                 {
                     b.HasOne("Get_Help.Infrastructure.Data.Models.Agent", "Agent")
                         .WithMany("Tickets")
-                        .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("AgentId");
 
                     b.HasOne("Get_Help.Infrastructure.Data.Models.Client", "Client")
                         .WithMany("Tickets")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Get_Help.Infrastructure.Data.Models.Topic", "Topic")
                         .WithMany("Tickets")
                         .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Agent");
@@ -883,7 +502,7 @@ namespace Get_Help.Infrastructure.Migrations
                     b.HasOne("Get_Help.Infrastructure.Data.Models.Service", "Service")
                         .WithMany("Topics")
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Service");
