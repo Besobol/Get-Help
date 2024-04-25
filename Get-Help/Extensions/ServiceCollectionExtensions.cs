@@ -40,11 +40,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<SignInManager<Client>>();
 
             services.AddIdentityCore<Agent>()
-                .AddRoles<ApplicationRole>()
+                .AddRoles<AgentRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityCore<Client>()
-                .AddRoles<ApplicationRole>()
+                .AddRoles<ClientRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             return services;

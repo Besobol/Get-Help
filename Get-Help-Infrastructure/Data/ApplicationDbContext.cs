@@ -29,6 +29,8 @@ namespace Get_Help.Infrastructure.Data
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<ClientRole> ClientRoles { get; set; }
+        public DbSet<AgentRole> AgentRoles { get; set; }
 
     }
 }

@@ -36,7 +36,7 @@ namespace Get_Help.Areas.Identity.Controllers
             
             var result = await accountService.SignInClientAsync(model);
 
-            return RedirectToAction("Index","Home", new { area = "" });
+            return RedirectToAction("Services","Client", new { area = "" });
         }
 
         [HttpGet]
@@ -65,7 +65,7 @@ namespace Get_Help.Areas.Identity.Controllers
                 }
             }
 
-            return RedirectToAction("Index", "Home", new { area = "" });
+            return RedirectToAction("Services", "Home", new { area = "" });
         }
     }
 }

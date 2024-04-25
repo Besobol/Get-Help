@@ -39,12 +39,12 @@ namespace Get_Help.Core.Services
             user.Id = int.MaxValue;
 
             await clientUserManager.SetEmailAsync(user, input.Email);
-
+            
             user.Id = 0;
 
-            await clientUserManager.AddToRoleAsync(user, "Client");
-
             var result = await clientUserManager.CreateAsync(user, input.Password);
+            
+            await clientUserManager.AddToRoleAsync(user, "Client");
 
             return result;
         }

@@ -12,17 +12,17 @@ namespace Get_Help.Extensions
             string adminPassword = "AdminForever";
 
             using var scope = app.ApplicationServices.CreateScope();
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<Agent>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AgentRole>>();
 
             if (userManager != null && roleManager != null)
             {
-                ApplicationRole role;
-                ApplicationUser admin;
+                AgentRole role;
+                Agent admin;
 
                 if (await roleManager.RoleExistsAsync(adminRole) == false) 
                 {
-                    role = new ApplicationRole(adminRole);
+                    role = new AgentRole(adminRole);
                     await roleManager.CreateAsync(role);
                 }
                 else
@@ -34,7 +34,7 @@ namespace Get_Help.Extensions
 
                 if (admin == null)
                 {
-                    admin = new ApplicationUser();
+                    admin = new Agent() { Name = role.Name};
                     await userManager.SetEmailAsync(admin, adminEmail);
 
                     admin.Id = int.MaxValue;
@@ -43,7 +43,7 @@ namespace Get_Help.Extensions
 
                     admin.Id = 0;
 
-                    var result = await userManager.CreateAsync(admin, adminPassword);
+                    await userManager.CreateAsync(admin, adminPassword);
                 }
 
                 if (await userManager.IsInRoleAsync(admin, adminRole) == false)
@@ -58,15 +58,13 @@ namespace Get_Help.Extensions
             string userRole = "Client";
 
             using var scope = app.ApplicationServices.CreateScope();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ClientRole>>();
 
             if (roleManager != null)
             {
-                ApplicationRole role;
-
                 if (await roleManager.RoleExistsAsync(userRole) == false)
                 {
-                    role = new ApplicationRole(userRole);
+                    var role = new ClientRole(userRole);
                     await roleManager.CreateAsync(role);
                 }
             }
@@ -76,15 +74,14 @@ namespace Get_Help.Extensions
             string userRole = "Agent";
 
             using var scope = app.ApplicationServices.CreateScope();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AgentRole>>();
 
             if (roleManager != null)
             {
-                ApplicationRole role;
 
                 if (await roleManager.RoleExistsAsync(userRole) == false)
                 {
-                    role = new ApplicationRole(userRole);
+                    var role = new AgentRole(userRole);
                     await roleManager.CreateAsync(role);
                 }
             }

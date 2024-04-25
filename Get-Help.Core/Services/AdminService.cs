@@ -47,7 +47,10 @@ namespace Get_Help.Core.Services
 
             user.Id = 0;
 
-            return await agentUserManager.CreateAsync(user, input.Password);
+            var result = await agentUserManager.CreateAsync(user, input.Password);
+            await agentUserManager.AddToRoleAsync(user, "Agent");
+
+            return result;
         }
 
         public async Task<IdentityResult> DeleteAgentById(int id)
@@ -89,7 +92,8 @@ namespace Get_Help.Core.Services
                 {
                     Id = a.Id,
                     Name = a.Name,
-                    Email = a.Email
+                    Email = a.Email,
+                    OpenTickets = a.Tickets.Where(t => t.TimeClosed != null).Count()
                 })
                 .FirstOrDefaultAsync();
 
@@ -130,6 +134,7 @@ namespace Get_Help.Core.Services
         public async Task<List<AgentListViewModel>> GerAgents()
         {
             var result = await repository.AllReadOnly<Agent>()
+                .Where(a => a.Id != 1)
                 .Select(a => new AgentListViewModel()
                 {
                     Id = a.Id,

@@ -1,0 +1,20 @@
+﻿@model List<ServiceModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="d-flex flex-column gap-2">
+    @foreach (var service in Model)
+    {
+        <div>
+            <a asp-action="Topics" asp-route-id="@service.Id" class="border border-primary d-block">
+                <div class="h-5 d-flex flex gap-2">
+                    <img class="d-block img-fluid" src="@service.ImgUrl" />
+                    <p class="align-self-center">@service.Name</p>
+                    <p class="align-self-center counter-end">@service.TopicCount Topics</p>
+                </div>
+            </a>
+        </div>
+    }
+</div>

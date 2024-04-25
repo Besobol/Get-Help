@@ -2,8 +2,10 @@
 @model AgentViewModel
 
 <section class="d-flex flex-column gap-2">
-    <div>@Model.Name</div>
-    <div>@Model.Email</div>
+    <div>Name: @Model.Name</div>
+    <div>Email: @Model.Email</div>
+    <div>Open Tickets: @Model.OpenTickets</div>
+    <hr />
     <div>
         <a class="btn btn-warning" asp-action="DeleteAgentById" asp-route-id="@Model.Id">Delete</a>
         <a class="btn btn-secondary" asp-action="ChangeAgentPassword" asp-route-id="@Model.Id">Change Password</a>
